@@ -6,7 +6,7 @@ namespace Koben.Kompair
 	public static class KompairDefaults
 	{
 		public static string GetDocumentTypesForComparisonPath = "/umbraco/api/Kompair/GetDocumentTypesForComparison";
-		public static string ApiKeyClientsConfigPath = @"App_Plugins\Koben.Kompair\clients.json";
+		public static string ApiKeyClientsConfigPath = @"App_Plugins\Koben.Kompair\data\clients.json";
 		public static string ApiKeyAuthHeader = "X-KOBEN-KOMPAIR-AUTH";
 		public static string CacheKey = "Kompair.Cache.Nonce-";
 

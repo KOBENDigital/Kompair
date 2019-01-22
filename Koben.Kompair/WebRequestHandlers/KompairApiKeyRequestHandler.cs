@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Net.Http;
 using System.Net.Http.Headers;
+using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using Koben.Kompair.Services;
@@ -20,13 +21,7 @@ namespace Koben.Kompair.WebRequestHandlers
 
 		protected override async Task<HttpResponseMessage> SendAsync(HttpRequestMessage request, CancellationToken cancellationToken)
 		{
-			if (request.Content == null)
-			{
-				return await base.SendAsync(request, cancellationToken);
-			}
-
-			byte[] content = await request.Content.ReadAsByteArrayAsync();
-
+			byte[] content = Encoding.UTF8.GetBytes(request.RequestUri.ToString());
 			string timestamp = _ApiKeyService.GetTimestampString(DateTime.UtcNow);
 			string nonce = _ApiKeyService.GetNonce();
 			string encryptedPayload = _ApiKeyService.EncryptPayload(_Config.ClientId, _Config.ClientSecret, nonce, timestamp, content);
