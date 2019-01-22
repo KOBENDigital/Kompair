@@ -1,25 +1,19 @@
 ﻿<configuration>
   <!--When using certificate auth mode, set with the thumprint of the certificate-->
     <!--<add key="Kompair.Certificate.Thumbprint" value="" />-->
-  <!--When using import certificate auth mode, set with the path to the certificate-->
-    <!--<add key="Kompair.Certificate.Path" value="" />-->
-  <!--When using import certificate auth mode, set with the password for the certificate-->
-   <!--<add key="Kompair.Certificate.Password" value="" />-->
-  <!--When using standard certificate auth mode, set with the name of the store of the certificate. Defaults to My-->
+  <!--When using certificate auth mode, set with the name of the store of the certificate. Defaults to My-->
     <!--<add key="Kompair.Certificate.StoreName" value="" />-->
-  <!--When using standard certificate auth mode, set with the name of the location of the certificate. Defaults to LocalMachine-->
+  <!--When using certificate auth mode, set with the name of the location of the certificate. Defaults to LocalMachine-->
     <!--<add key="Kompair.Certificate.StoreLocation" value="" />-->
-  <!--When using certificate auth modes, set to indicate to only use valid certificates. Defaults to true-->
+  <!--When using certificate auth mode, set to indicate to only use valid certificates. Defaults to true-->
     <!--<add key="Kompair.Certificate.ValidOnly" value="" />-->
-  <!--When using certificate auth modes, set to true indicate to use the import method. Defaults to false.-->
-    <!--<add key="Kompair.Certificate.UseImportMethod" value="" />-->
   <!--When using Api Key auth mode, set this with the Api Key client id-->
     <!--<add key="Kompair.ApiKey.ClientId" value="" />-->
   <!--When using Api Key auth mode, set this with the Api Key client secret-->
     <!--<add key="Kompair.ApiKey.ClientSecret" value="" />-->
   <!--Only use this if you have a custom location for storing the clients.json file-->
     <!--<add key="Kompair.ApiKey.ClientsConfigPath" value="" />-->
-  <!--Only use this if your site has custom routing for plugins-->
+  <!--Only use this if your site has custom routing for umbraco API endpoints-->
     <!--<add key="Kompair.GetDocumentTypesForComparisonPath" value="" />-->
   <!--Indicates what auth mode to use for Umbraco to Umbraco communication. Values are Certificate, Key, None.-->
     <add key="Kompair.AuthenticationMode" value="Certificate" />

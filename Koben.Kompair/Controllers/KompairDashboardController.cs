@@ -22,16 +22,12 @@ namespace Koben.Kompair.Controllers
 			_KompairDataService = new KompairDataService(new KompairContentTypesService(), new KompairDataTypesService());
 			
 			string certificateThumbprint = ConfigurationManager.AppSettings[KompairDefaults.CertificateThumbprintAppSetting];
-			string certificatePath = ConfigurationManager.AppSettings[KompairDefaults.CertificatePathAppSetting];
-			string certificatePassword = ConfigurationManager.AppSettings[KompairDefaults.CertificatePasswordAppSetting];
 			string clientId = ConfigurationManager.AppSettings[KompairDefaults.ApiKeyClientIdAppSetting];
 			string clientSecret = ConfigurationManager.AppSettings[KompairDefaults.ApiKeyClientSecretAppSetting];
 
 			var config = new KompairHttpServiceConfig
 			{
 				CertificateThumbprint = certificateThumbprint,
-				CertificatePath = certificatePath,
-				CertificatePassword = certificatePassword,
 				ClientId = clientId,
 				ClientSecret = clientSecret
 			};
@@ -56,16 +52,10 @@ namespace Koben.Kompair.Controllers
 				validCertificatesOnly = KompairDefaults.ValidCertificatesOnly;
 			}
 
-			if (!bool.TryParse(ConfigurationManager.AppSettings[KompairDefaults.CertificateUseImportMethodAppSetting], out bool useImportCertificateMethod))
-			{
-				useImportCertificateMethod = KompairDefaults.UseImportCertificateMethod;
-			}
-
 			config.AuthenticationMode = authMode;
 			config.CertificateStore = store;
 			config.CertificateLocation = location;
 			config.ValidCertificatesOnly = validCertificatesOnly;
-			config.UseImportCertificateMethod = useImportCertificateMethod;
 
 			_KompairHttpService = new KompairHttpService(config, new KompairCertificateService(), new KompairApiKeyService());
 		}

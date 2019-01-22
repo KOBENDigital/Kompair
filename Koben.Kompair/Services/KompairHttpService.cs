@@ -34,24 +34,15 @@ namespace Koben.Kompair.Services
 				{
 					requestHandler = new WebRequestHandler();
 
-					if (_Config.UseImportCertificateMethod)
-					{
-						requestHandler.ClientCertificates.AddRange(
-							_CertificateService.ImportClientCertificate(_Config.CertificatePath,
-							                                            _Config.CertificatePassword));
-					}
-					else
-					{
-						var certificate = _CertificateService.GetClientCertificate(_Config.CertificateStore,
-						                                                           _Config.CertificateLocation,
-						                                                           _Config.CertificateThumbprint,
-						                                                           _Config.ValidCertificatesOnly);
-						requestHandler.ClientCertificates.Add(certificate);
-					}
+					var certificate = _CertificateService.GetClientCertificate(_Config.CertificateStore,
+					                                                           _Config.CertificateLocation,
+					                                                           _Config.CertificateThumbprint,
+					                                                           _Config.ValidCertificatesOnly);
+					requestHandler.ClientCertificates.Add(certificate);
 
 					if (!_Config.ValidCertificatesOnly)
 					{
-						ServicePointManager.ServerCertificateValidationCallback += (sender, certificate, chain, errors) => true;
+						ServicePointManager.ServerCertificateValidationCallback += (sender, cert, chain, errors) => true;
 					}
 
 					break;
@@ -86,10 +77,7 @@ namespace Koben.Kompair.Services
 		public StoreName CertificateStore { get; set; }
 		public StoreLocation CertificateLocation { get; set; }
 		public string CertificateThumbprint { get; set; }
-		public string CertificatePath { get; set; }
-		public string CertificatePassword { get; set; }
 		public bool ValidCertificatesOnly { get; set; }
-		public bool UseImportCertificateMethod { get; set; }
 		public string ClientId { get; set; }
 		public string ClientSecret { get; set; }
 		public KompairAuthenticationMode AuthenticationMode { get; set; }

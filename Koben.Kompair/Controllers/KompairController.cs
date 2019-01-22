@@ -32,7 +32,7 @@ namespace Koben.Kompair.Controllers
 		}
 
 		[HttpGet]
-		public async Task<IHttpActionResult> GetDocumentTypesForComparison()
+		public IHttpActionResult GetDocumentTypesForComparison()
 		{
 			if (!Enum.TryParse(ConfigurationManager.AppSettings[KompairDefaults.AuthenticationModeAppSetting], out KompairAuthenticationMode authMode))
 			{
@@ -53,7 +53,7 @@ namespace Koben.Kompair.Controllers
 					return Unauthorized(authHeaderValue);
 
 				case KompairAuthenticationMode.Key:
-					if (await AuthenticateApiKey())
+					if (AuthenticateApiKey())
 					{
 						return Json(_KompairDataService.GetDocumentTypesForComparison());
 					}
@@ -96,7 +96,7 @@ namespace Koben.Kompair.Controllers
 			       clientCertificate.Thumbprint.Equals(requestCertificate.Thumbprint);
 		}
 
-		private async Task<bool> AuthenticateApiKey()
+		private bool AuthenticateApiKey()
 		{
 			byte[] content = Encoding.UTF8.GetBytes(Request.RequestUri.ToString());
 			string requestAuth = Request.Headers.Authorization.Parameter;
