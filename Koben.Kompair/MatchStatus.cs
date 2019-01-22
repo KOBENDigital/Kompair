@@ -1,4 +1,4 @@
-﻿namespace Koben.SanityCheck
+﻿namespace Koben.Kompair
 {
 	public enum MatchStatus
 	{

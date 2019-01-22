@@ -1,8 +1,8 @@
 ﻿using System.Linq;
-using Koben.SanityCheck.DTOs;
-using Koben.SanityCheck.Models;
+using Koben.Kompair.DTOs;
+using Koben.Kompair.Models;
 
-namespace Koben.SanityCheck.Services
+namespace Koben.Kompair.Services
 {
 	public class KompairService : IKompairService
 	{

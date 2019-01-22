@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
-using Koben.SanityCheck.Models;
+using Koben.Kompair.Models;
 
-namespace Koben.SanityCheck.DTOs
+namespace Koben.Kompair.DTOs
 {
 	public class KompairDocumentTypesAndEditors
 	{

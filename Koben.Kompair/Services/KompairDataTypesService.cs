@@ -1,7 +1,7 @@
 ﻿using Umbraco.Core;
 using Umbraco.Core.Models;
 
-namespace Koben.SanityCheck.Services
+namespace Koben.Kompair.Services
 {
 	public class KompairDataTypesService : IKompairDataTypesService
 	{
