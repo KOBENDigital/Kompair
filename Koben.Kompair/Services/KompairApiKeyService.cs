@@ -27,7 +27,7 @@ namespace Koben.Kompair.Services
 
 		public string EncryptPayload(string clientId, string clientSecret, string nonce, string timestamp, string data)
 		{
-			return EncryptPayload(clientId, clientSecret, nonce, timestamp, Encoding.ASCII.GetBytes(data));
+			return EncryptPayload(clientId, clientSecret, nonce, timestamp, Encoding.UTF8.GetBytes(data));
 		}
 
 		public string EncryptPayload(string clientId, string clientSecret, string nonce, string timestamp, byte[] data)
@@ -38,7 +38,7 @@ namespace Koben.Kompair.Services
 
 			string signatureRawData = $"{clientId}{timestamp}{nonce}{requestContentBase64String}";
 
-			byte[] secretKeyByteArray = Convert.FromBase64String(clientSecret);
+			byte[] secretKeyByteArray = Encoding.UTF8.GetBytes(clientSecret);
 			byte[] signature = Encoding.UTF8.GetBytes(signatureRawData);
 
 			using (HMACSHA256 hmac = new HMACSHA256(secretKeyByteArray))

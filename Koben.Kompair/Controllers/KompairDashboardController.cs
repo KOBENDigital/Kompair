@@ -36,6 +36,11 @@ namespace Koben.Kompair.Controllers
 				ClientSecret = clientSecret
 			};
 
+			if (!Enum.TryParse(ConfigurationManager.AppSettings[KompairDefaults.AuthenticationModeAppSetting], out KompairAuthenticationMode authMode))
+			{
+				authMode = KompairDefaults.AuthenticationMode;
+			}
+
 			if (!Enum.TryParse(ConfigurationManager.AppSettings[KompairDefaults.CertificateStoreNameAppSetting], out StoreName store))
 			{
 				store = KompairDefaults.CertificateStoreName;
@@ -56,6 +61,7 @@ namespace Koben.Kompair.Controllers
 				useImportCertificateMethod = KompairDefaults.UseImportCertificateMethod;
 			}
 
+			config.AuthenticationMode = authMode;
 			config.CertificateStore = store;
 			config.CertificateLocation = location;
 			config.ValidCertificatesOnly = validCertificatesOnly;

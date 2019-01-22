@@ -5,6 +5,7 @@ using System.Linq;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Security.Cryptography.X509Certificates;
+using System.Text;
 using System.Threading.Tasks;
 using System.Web.Http;
 using System.Web.Http.Results;
@@ -43,7 +44,7 @@ namespace Koben.Kompair.Controllers
 			switch (authMode)
 			{
 				case KompairAuthenticationMode.Certificate:
-					if (!AuthenticateCertificate())
+					if (AuthenticateCertificate())
 					{
 						return Json(_KompairDataService.GetDocumentTypesForComparison());
 					}
@@ -52,7 +53,7 @@ namespace Koben.Kompair.Controllers
 					return Unauthorized(authHeaderValue);
 
 				case KompairAuthenticationMode.Key:
-					if (!await AuthenticateApiKey())
+					if (await AuthenticateApiKey())
 					{
 						return Json(_KompairDataService.GetDocumentTypesForComparison());
 					}
@@ -90,15 +91,15 @@ namespace Koben.Kompair.Controllers
 			X509Certificate2 clientCertificate = _KompairCertificateService.GetClientCertificate(store, location, thumbprint, validCertificatesOnly);
 			X509Certificate2 requestCertificate = Request.GetClientCertificate();
 
-			return requestCertificate?.Thumbprint == null ||
-			       clientCertificate?.Thumbprint == null ||
-			       !clientCertificate.Thumbprint.Equals(requestCertificate.Thumbprint);
+			return requestCertificate?.Thumbprint != null &&
+			       clientCertificate?.Thumbprint != null &&
+			       clientCertificate.Thumbprint.Equals(requestCertificate.Thumbprint);
 		}
 
 		private async Task<bool> AuthenticateApiKey()
 		{
-			byte[] requestContent = await Request.Content.ReadAsByteArrayAsync();
-			string requestAuth = Request.Headers.GetValues(KompairDefaults.ApiKeyAuthHeader).FirstOrDefault();
+			byte[] content = Encoding.UTF8.GetBytes(Request.RequestUri.ToString());
+			string requestAuth = Request.Headers.Authorization.Parameter;
 
 			if (string.IsNullOrWhiteSpace(requestAuth))
 			{
@@ -152,9 +153,7 @@ namespace Koben.Kompair.Controllers
 				return false;
 			}
 
-			string timestamp = _ApiKeyService.GetTimestampString(DateTime.UtcNow);
-			string nonce = _ApiKeyService.GetNonce();
-			string encryptedPayload = _ApiKeyService.EncryptPayload(client.ClientId, client.ClientSecret, nonce, timestamp, requestContent);
+			string encryptedPayload = _ApiKeyService.EncryptPayload(client.ClientId, client.ClientSecret, requestNonce, requestTimestamp, content);
 
 			return string.Equals(encryptedPayload, requestPayload, StringComparison.Ordinal);
 		}
