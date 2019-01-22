@@ -23,7 +23,7 @@ namespace Koben.SanityCheck.Controllers
 		[HttpGet]
 		public IHttpActionResult GetDocumentTypesForComparison()
 		{
-			if (!bool.TryParse(ConfigurationManager.AppSettings[KompairDefaults.SkipAuthenticationAppSetting], out bool skipAuthentication))
+			if (!bool.TryParse(ConfigurationManager.AppSettings[KompairDefaults.AuthenticationModeAppSetting], out bool skipAuthentication))
 			{
 				skipAuthentication = KompairDefaults.SkipAuthentication;
 			}
