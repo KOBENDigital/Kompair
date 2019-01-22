@@ -279,7 +279,9 @@
     </None>
     <None Include="Koben.Kompair.nuspec" />
     <None Include="packages.config" />
-    <None Include="web.config.transform" />
+    <None Include="Transforms\Dashboard.config.uninstall.xdt" />
+    <None Include="Transforms\Dashboard.config.install.xdt" />
+    <None Include="Transforms\web.config.transform" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

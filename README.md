@@ -98,6 +98,11 @@ More testing on earlier versions is planned and contributers are more than welco
 Testing on new releases will be performed as they come out.
 
 ## Changelog
+### 0.1.5
+- Added install and uninstall nuget transforms for dashboard.
+- Clean up.
+- README work.
+- Upped assembly version to 0.1.5.
 ### 0.1.4
 - Fixed nuspec issue with web config transform.
 - README work.
