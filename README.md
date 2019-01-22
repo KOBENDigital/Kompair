@@ -98,6 +98,10 @@ More testing on earlier versions is planned and contributers are more than welco
 Testing on new releases will be performed as they come out.
 
 ## Changelog
+### 0.1.4
+- Fixed nuspec issue with web config transform.
+- README work.
+- Upped assembly version to 0.1.4.
 ### 0.1.3
 - Removed Json.NET dependency from NuSpec as this will come from the UmbracoCms.Core dependency.
 - Removed UseImportMethod certificate config values as well as the logic.
