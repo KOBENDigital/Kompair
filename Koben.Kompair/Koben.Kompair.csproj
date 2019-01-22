@@ -228,6 +228,7 @@
     <Compile Include="Controllers\KompairDashboardController.cs" />
     <Compile Include="DTOs\KompairDocumentTypesAndEditors.cs" />
     <Compile Include="DTOs\KompairResults.cs" />
+    <Compile Include="KompairAuthenticationMode.cs" />
     <Compile Include="KompairDefaults.cs" />
     <Compile Include="MatchStatus.cs" />
     <Compile Include="Models\KompairDataType.cs" />
