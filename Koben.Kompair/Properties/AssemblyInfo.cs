@@ -6,9 +6,9 @@ using System.Runtime.InteropServices;
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
 [assembly: AssemblyTitle("Koben.Kompair")]
-[assembly: AssemblyDescription("")]
+[assembly: AssemblyDescription("Koben.Kompair is a library for comparing document types, property groups and properties as well as property editors of two separate umbraco instances.")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("")]
+[assembly: AssemblyCompany("KØben Digital")]
 [assembly: AssemblyProduct("Koben.Kompair")]
 [assembly: AssemblyCopyright("Copyright ©  2019")]
 [assembly: AssemblyTrademark("")]
