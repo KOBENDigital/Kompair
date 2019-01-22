@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using Umbraco.Core.Models;
 using Umbraco.Core;
 
-namespace Koben.SanityCheck.Services
+namespace Koben.Kompair.Services
 {
 	public class KompairContentTypesService : IKompairContentTypesService
 	{

@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
-using Koben.SanityCheck.Models;
+using Koben.Kompair.Models;
 
-namespace Koben.SanityCheck.Comparers
+namespace Koben.Kompair.Comparers
 {
 	public sealed class KompairDocumentTypeEqualityComparer : IEqualityComparer<KompairDocumentType>
 	{

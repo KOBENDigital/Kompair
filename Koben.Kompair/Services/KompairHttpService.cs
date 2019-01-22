@@ -4,42 +4,68 @@ using System.Net;
 using System.Net.Http;
 using System.Security.Cryptography.X509Certificates;
 using System.Threading.Tasks;
-using Koben.SanityCheck.DTOs;
+using Koben.Kompair.DTOs;
+using Koben.Kompair.WebRequestHandlers;
 using Newtonsoft.Json;
 
-namespace Koben.SanityCheck.Services
+namespace Koben.Kompair.Services
 {
 	public class KompairHttpService : IKompairHttpService
 	{
 		private readonly KompairHttpServiceConfig _Config;
 		private readonly IKompairCertificateService _CertificateService;
+		private readonly IKompairApiKeyService _ApiKeyService;
 
-		public KompairHttpService(KompairHttpServiceConfig config, IKompairCertificateService certificateService)
+		public KompairHttpService(KompairHttpServiceConfig config, IKompairCertificateService certificateService,
+		                          IKompairApiKeyService apiKeyService)
 		{
 			_Config = config ?? throw new ArgumentNullException(nameof(config));
 			_CertificateService = certificateService ?? throw new ArgumentNullException(nameof(certificateService));
+			_ApiKeyService = apiKeyService ?? throw new ArgumentNullException(nameof(apiKeyService));
 		}
 
 		public async Task<KompairDocumentTypesAndEditors> GetTargetDocumentTypes(Uri targetUrl)
 		{
-			WebRequestHandler requestHandler = new WebRequestHandler();
+			WebRequestHandler requestHandler = null;
 
-			if (_Config.UseImportMethod)
+			switch (_Config.AuthenticationMode)
 			{
-				requestHandler.ClientCertificates.AddRange(_CertificateService.ImportClientCertificate(_Config.CerificatePath, _Config.CerificatePassword));
-			}
-			else
-			{
-				var certificate = _CertificateService.GetClientCertificate(_Config.Store, _Config.Location, _Config.CerificateThumbprint, _Config.ValidCerificatesOnly);
-				requestHandler.ClientCertificates.Add(certificate);
+				case KompairAuthenticationMode.Certificate:
+				{
+					requestHandler = new WebRequestHandler();
+
+					if (_Config.UseImportCertificateMethod)
+					{
+						requestHandler.ClientCertificates.AddRange(
+							_CertificateService.ImportClientCertificate(_Config.CertificatePath,
+							                                            _Config.CertificatePassword));
+					}
+					else
+					{
+						var certificate = _CertificateService.GetClientCertificate(_Config.CertificateStore,
+						                                                           _Config.CertificateLocation,
+						                                                           _Config.CertificateThumbprint,
+						                                                           _Config.ValidCertificatesOnly);
+						requestHandler.ClientCertificates.Add(certificate);
+					}
+
+					if (!_Config.ValidCertificatesOnly)
+					{
+						ServicePointManager.ServerCertificateValidationCallback += (sender, certificate, chain, errors) => true;
+					}
+
+					break;
+				}
+				case KompairAuthenticationMode.Key:
+					requestHandler = new KompairApiKeyRequestHandler(new KompairApiKeyRequestHandlerConfig
+					{
+						ClientId = _Config.ClientId,
+						ClientSecret = _Config.ClientSecret
+					}, _ApiKeyService);
+					break;
 			}
 
-			if (!_Config.ValidCerificatesOnly)
-			{
-				ServicePointManager.ServerCertificateValidationCallback += (sender, certificate, chain, errors) => true;
-			}
-
-			using (HttpClient client = new HttpClient(requestHandler))
+			using (HttpClient client = requestHandler == null ? new HttpClient() : new HttpClient(requestHandler))
 			{
 				HttpResponseMessage response = await client.GetAsync(targetUrl);
 				response.EnsureSuccessStatusCode();
@@ -57,12 +83,15 @@ namespace Koben.SanityCheck.Services
 
 	public class KompairHttpServiceConfig
 	{
-		public StoreName Store { get; set; }
-		public StoreLocation Location { get; set; }
-		public string CerificateThumbprint { get; set; }
-		public string CerificatePath { get; set; }
-		public string CerificatePassword { get; set; }
-		public bool ValidCerificatesOnly { get; set; }
-		public bool UseImportMethod { get; set; }
+		public StoreName CertificateStore { get; set; }
+		public StoreLocation CertificateLocation { get; set; }
+		public string CertificateThumbprint { get; set; }
+		public string CertificatePath { get; set; }
+		public string CertificatePassword { get; set; }
+		public bool ValidCertificatesOnly { get; set; }
+		public bool UseImportCertificateMethod { get; set; }
+		public string ClientId { get; set; }
+		public string ClientSecret { get; set; }
+		public KompairAuthenticationMode AuthenticationMode { get; set; }
 	}
 }

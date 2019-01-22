@@ -152,6 +152,7 @@
     <Reference Include="System.ValueTuple, Version=4.0.2.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>..\packages\System.ValueTuple.4.4.0\lib\net47\System.ValueTuple.dll</HintPath>
     </Reference>
+    <Reference Include="System.Web" />
     <Reference Include="System.Web.Helpers, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.Helpers.dll</HintPath>
     </Reference>
@@ -221,6 +222,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DTOs\CompareRequest.cs" />
+    <Compile Include="KompairClientConfig.cs" />
+    <Compile Include="KompairClientConfigCollection.cs" />
     <Compile Include="Comparers\KompairDocumentTypeEqualityComparer.cs" />
     <Compile Include="Comparers\KompairPropertyEqualityComparer.cs" />
     <Compile Include="Comparers\KompairPropertyGroupEqualityComparer.cs" />
@@ -228,6 +232,7 @@
     <Compile Include="Controllers\KompairDashboardController.cs" />
     <Compile Include="DTOs\KompairDocumentTypesAndEditors.cs" />
     <Compile Include="DTOs\KompairResults.cs" />
+    <Compile Include="EnumExtensions.cs" />
     <Compile Include="KompairAuthenticationMode.cs" />
     <Compile Include="KompairDefaults.cs" />
     <Compile Include="MatchStatus.cs" />
@@ -237,41 +242,44 @@
     <Compile Include="Models\KompairPropertyEditor.cs" />
     <Compile Include="Models\KompairPropertyGroup.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Services\IKompairApiKeyService.cs" />
     <Compile Include="Services\IKompairCertificateService.cs" />
     <Compile Include="Services\IKompairContentTypesService.cs" />
     <Compile Include="Services\IKompairDataService.cs" />
     <Compile Include="Services\IKompairDataTypesService.cs" />
     <Compile Include="Services\IKompairHttpService.cs" />
     <Compile Include="Services\IKompairService.cs" />
+    <Compile Include="Services\KompairApiKeyService.cs" />
     <Compile Include="Services\KompairCertificateService.cs" />
     <Compile Include="Services\KompairContentTypesService.cs" />
     <Compile Include="Services\KompairDataService.cs" />
     <Compile Include="Services\KompairDataTypesService.cs" />
     <Compile Include="Services\KompairHttpService.cs" />
     <Compile Include="Services\KompairService.cs" />
+    <Compile Include="WebRequestHandlers\KompairApiKeyRequestHandler.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="App_Plugins\Koben.Kompair\css\kompair.css" />
-    <Content Include="App_Plugins\Koben.Kompair\js\kompair.js" />
-    <Content Include="App_Plugins\Koben.Kompair\KompairDashboard.html" />
-    <Content Include="App_Plugins\Koben.Kompair\node_modules\angular\angular-csp.css" />
-    <Content Include="App_Plugins\Koben.Kompair\node_modules\angular\angular.js" />
-    <Content Include="App_Plugins\Koben.Kompair\node_modules\angular\angular.min.js" />
-    <Content Include="App_Plugins\Koben.Kompair\node_modules\angular\index.js" />
+    <Content Include="App_Plugins\Koben.Kompair\css\kompair.css">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="App_Plugins\Koben.Kompair\js\kompair.js">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="App_Plugins\Koben.Kompair\KompairDashboard.html">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
-    <None Include="App_Plugins\Koben.Kompair\node_modules\angular\angular.min.js.gzip" />
-    <None Include="App_Plugins\Koben.Kompair\node_modules\angular\angular.min.js.map" />
-    <None Include="App_Plugins\Koben.Kompair\node_modules\angular\bower.json" />
-    <None Include="App_Plugins\Koben.Kompair\node_modules\angular\LICENSE.md" />
-    <None Include="App_Plugins\Koben.Kompair\node_modules\angular\package.json" />
-    <None Include="App_Plugins\Koben.Kompair\node_modules\angular\README.md" />
-    <None Include="App_Plugins\Koben.Kompair\package-lock.json" />
-    <None Include="App_Plugins\Koben.Kompair\package.json" />
-    <None Include="App_Plugins\Koben.Kompair\package.manifest" />
+    <None Include="App_Plugins\Koben.Kompair\data\clients.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="App_Plugins\Koben.Kompair\package.manifest">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="Koben.Kompair.nuspec" />
     <None Include="packages.config" />
+    <None Include="web.config.transform" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

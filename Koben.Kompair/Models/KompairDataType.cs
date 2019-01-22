@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Koben.SanityCheck.Models
+namespace Koben.Kompair.Models
 {
 	public class KompairDataType : IEquatable<KompairDataType>
 	{

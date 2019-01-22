@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Threading.Tasks;
-using Koben.SanityCheck.DTOs;
+using Koben.Kompair.DTOs;
 
-namespace Koben.SanityCheck.Services
+namespace Koben.Kompair.Services
 {
 	public interface IKompairHttpService
 	{

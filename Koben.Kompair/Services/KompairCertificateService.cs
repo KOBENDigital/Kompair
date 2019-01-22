@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Security.Cryptography.X509Certificates;
 
-namespace Koben.SanityCheck.Services
+namespace Koben.Kompair.Services
 {
 	public class KompairCertificateService : IKompairCertificateService
 	{

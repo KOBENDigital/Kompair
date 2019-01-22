@@ -3,11 +3,11 @@ using System.Configuration;
 using System.Security.Cryptography.X509Certificates;
 using System.Threading.Tasks;
 using System.Web.Http;
-using System.Web.Http.Results;
-using Koben.SanityCheck.Services;
+using Koben.Kompair.DTOs;
+using Koben.Kompair.Services;
 using Umbraco.Web.Editors;
 
-namespace Koben.SanityCheck.Controllers
+namespace Koben.Kompair.Controllers
 {
 	[Umbraco.Web.Mvc.PluginController("Kompair")]
 	public class KompairDashboardController : UmbracoAuthorizedJsonController
@@ -21,11 +21,19 @@ namespace Koben.SanityCheck.Controllers
 			_KompairService = new KompairService();
 			_KompairDataService = new KompairDataService(new KompairContentTypesService(), new KompairDataTypesService());
 			
-			string certificateName = ConfigurationManager.AppSettings[KompairDefaults.CertificateThumbprintAppSetting];
+			string certificateThumbprint = ConfigurationManager.AppSettings[KompairDefaults.CertificateThumbprintAppSetting];
+			string certificatePath = ConfigurationManager.AppSettings[KompairDefaults.CertificatePathAppSetting];
+			string certificatePassword = ConfigurationManager.AppSettings[KompairDefaults.CertificatePasswordAppSetting];
+			string clientId = ConfigurationManager.AppSettings[KompairDefaults.ApiKeyClientIdAppSetting];
+			string clientSecret = ConfigurationManager.AppSettings[KompairDefaults.ApiKeyClientSecretAppSetting];
 
 			var config = new KompairHttpServiceConfig
 			{
-				CerificateThumbprint = certificateName
+				CertificateThumbprint = certificateThumbprint,
+				CertificatePath = certificatePath,
+				CertificatePassword = certificatePassword,
+				ClientId = clientId,
+				ClientSecret = clientSecret
 			};
 
 			if (!Enum.TryParse(ConfigurationManager.AppSettings[KompairDefaults.CertificateStoreNameAppSetting], out StoreName store))
@@ -43,11 +51,17 @@ namespace Koben.SanityCheck.Controllers
 				validCertificatesOnly = KompairDefaults.ValidCertificatesOnly;
 			}
 
-			config.Store = store;
-			config.Location = location;
-			config.ValidCerificatesOnly = validCertificatesOnly;
+			if (!bool.TryParse(ConfigurationManager.AppSettings[KompairDefaults.CertificateUseImportMethodAppSetting], out bool useImportCertificateMethod))
+			{
+				useImportCertificateMethod = KompairDefaults.UseImportCertificateMethod;
+			}
 
-			_KompairHttpService = new KompairHttpService(config, new KompairCertificateService());
+			config.CertificateStore = store;
+			config.CertificateLocation = location;
+			config.ValidCertificatesOnly = validCertificatesOnly;
+			config.UseImportCertificateMethod = useImportCertificateMethod;
+
+			_KompairHttpService = new KompairHttpService(config, new KompairCertificateService(), new KompairApiKeyService());
 		}
 		
 		[HttpPost]
@@ -58,7 +72,7 @@ namespace Koben.SanityCheck.Controllers
 				return BadRequest("targetUrl must be provided");
 			}
 
-			string comparePath = ConfigurationManager.AppSettings["Kompair.GetDocumentTypesForComparisonPath"] ??
+			string comparePath = ConfigurationManager.AppSettings[KompairDefaults.GetDocumentTypesForComparisonPathAppSetting] ??
 			                     KompairDefaults.GetDocumentTypesForComparisonPath;
 			var source = _KompairDataService.GetDocumentTypesForComparison();
 			var target = await _KompairHttpService.GetTargetDocumentTypes(new Uri(new Uri(request.TargetUrl), comparePath));
@@ -67,10 +81,5 @@ namespace Koben.SanityCheck.Controllers
 
 			return Json(results);
 		}
-	}
-
-	public class CompareRequest
-	{
-		public string TargetUrl { get; set; }
 	}
 }

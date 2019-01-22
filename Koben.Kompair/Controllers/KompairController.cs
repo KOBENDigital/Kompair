@@ -1,38 +1,75 @@
 ﻿using System;
 using System.Configuration;
+using System.IO;
+using System.Linq;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Security.Cryptography.X509Certificates;
+using System.Threading.Tasks;
 using System.Web.Http;
-using Koben.SanityCheck.Services;
+using System.Web.Http.Results;
+using Koben.Kompair.Services;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using Umbraco.Web.WebApi;
 
-namespace Koben.SanityCheck.Controllers
+namespace Koben.Kompair.Controllers
 {
 	public class KompairController : UmbracoApiController
 	{
+		private readonly UInt64 RequestMaxAgeInSeconds = 300;
+
 		private readonly IKompairDataService _KompairDataService;
 		private readonly IKompairCertificateService _KompairCertificateService;
+		private readonly IKompairApiKeyService _ApiKeyService;
 
 		public KompairController()
 		{
 			_KompairDataService = new KompairDataService(new KompairContentTypesService(), new KompairDataTypesService());
 			_KompairCertificateService = new KompairCertificateService();
+			_ApiKeyService = new KompairApiKeyService();
 		}
 
 		[HttpGet]
-		public IHttpActionResult GetDocumentTypesForComparison()
+		public async Task<IHttpActionResult> GetDocumentTypesForComparison()
 		{
-			if (!bool.TryParse(ConfigurationManager.AppSettings[KompairDefaults.AuthenticationModeAppSetting], out bool skipAuthentication))
+			if (!Enum.TryParse(ConfigurationManager.AppSettings[KompairDefaults.AuthenticationModeAppSetting], out KompairAuthenticationMode authMode))
 			{
-				skipAuthentication = KompairDefaults.SkipAuthentication;
+				authMode = KompairDefaults.AuthenticationMode;
 			}
 
-			if (skipAuthentication)
-			{
-				return Json(_KompairDataService.GetDocumentTypesForComparison());
-			}
+			AuthenticationHeaderValue authHeaderValue;
 
+			switch (authMode)
+			{
+				case KompairAuthenticationMode.Certificate:
+					if (!AuthenticateCertificate())
+					{
+						return Json(_KompairDataService.GetDocumentTypesForComparison());
+					}
+
+					authHeaderValue = new AuthenticationHeaderValue("ClientCert");
+					return Unauthorized(authHeaderValue);
+
+				case KompairAuthenticationMode.Key:
+					if (!await AuthenticateApiKey())
+					{
+						return Json(_KompairDataService.GetDocumentTypesForComparison());
+					}
+
+					authHeaderValue = new AuthenticationHeaderValue(KompairDefaults.ApiKeyAuthHeader);
+					return Unauthorized(authHeaderValue);
+
+				case KompairAuthenticationMode.None:
+					return Json(_KompairDataService.GetDocumentTypesForComparison());
+
+				default:
+					throw new ArgumentOutOfRangeException();
+			}
+		}
+
+		private bool AuthenticateCertificate()
+		{
 			string thumbprint = ConfigurationManager.AppSettings[KompairDefaults.CertificateThumbprintAppSetting];
 
 			if (!Enum.TryParse(ConfigurationManager.AppSettings[KompairDefaults.CertificateStoreNameAppSetting], out StoreName store))
@@ -53,15 +90,95 @@ namespace Koben.SanityCheck.Controllers
 			X509Certificate2 clientCertificate = _KompairCertificateService.GetClientCertificate(store, location, thumbprint, validCertificatesOnly);
 			X509Certificate2 requestCertificate = Request.GetClientCertificate();
 
-			if (requestCertificate?.Thumbprint == null ||
-			    clientCertificate?.Thumbprint == null || 
-			    !clientCertificate.Thumbprint.Equals(requestCertificate.Thumbprint))
+			return requestCertificate?.Thumbprint == null ||
+			       clientCertificate?.Thumbprint == null ||
+			       !clientCertificate.Thumbprint.Equals(requestCertificate.Thumbprint);
+		}
+
+		private async Task<bool> AuthenticateApiKey()
+		{
+			byte[] requestContent = await Request.Content.ReadAsByteArrayAsync();
+			string requestAuth = Request.Headers.GetValues(KompairDefaults.ApiKeyAuthHeader).FirstOrDefault();
+
+			if (string.IsNullOrWhiteSpace(requestAuth))
 			{
-				AuthenticationHeaderValue authHeaderValue = new AuthenticationHeaderValue("ClientCert");
-				return Unauthorized(authHeaderValue);
+				return false;
 			}
 
-			return Json(_KompairDataService.GetDocumentTypesForComparison());
+			string[] splitPayload = _ApiKeyService.GetAuthHeaderValues(requestAuth);
+
+			if (splitPayload == null)
+			{
+				return false;
+			}
+
+			string requestClientId = splitPayload[0];
+			string requestPayload = splitPayload[1];
+			string requestNonce = splitPayload[2];
+			string requestTimestamp = splitPayload[3];
+
+			if (IsReplayRequest(requestNonce, requestTimestamp))
+			{
+				return false;
+			}
+
+			string clientConfigPath = ConfigurationManager.AppSettings[KompairDefaults.ApiKeyClientsConfigPathAppSetting] 
+			                          ?? KompairDefaults.ApiKeyClientsConfigPath;
+			string clientConfigAbsolutePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, clientConfigPath);
+
+			if (!File.Exists(clientConfigAbsolutePath))
+			{
+				throw new NotSupportedException("Client config has not been set on the server");
+			}
+
+			string clientConfigString = File.ReadAllText(clientConfigAbsolutePath);
+
+			if (string.IsNullOrWhiteSpace(clientConfigString))
+			{
+				throw new NotSupportedException("Client config has not been set on the server");
+			}
+
+			KompairClientConfigCollection clients = JsonConvert.DeserializeObject<KompairClientConfigCollection>(clientConfigString);
+
+			if (clients == null || clients.Clients.Length == 0)
+			{
+				throw new NotSupportedException("Client config has not been set on the server");
+			}
+
+			KompairClientConfig client = clients.Clients.FirstOrDefault(c => c.ClientId == requestClientId);
+
+			if (client == null)
+			{
+				return false;
+			}
+
+			string timestamp = _ApiKeyService.GetTimestampString(DateTime.UtcNow);
+			string nonce = _ApiKeyService.GetNonce();
+			string encryptedPayload = _ApiKeyService.EncryptPayload(client.ClientId, client.ClientSecret, nonce, timestamp, requestContent);
+
+			return string.Equals(encryptedPayload, requestPayload, StringComparison.Ordinal);
+		}
+
+		private bool IsReplayRequest(string nonce, string requestTimeStamp)
+		{
+			string nonceCacheKey = KompairDefaults.CacheKey + nonce;
+
+			if (ApplicationContext.ApplicationCache.RuntimeCache.GetCacheItem(nonceCacheKey) != null)
+			{
+				return true;
+			}
+		
+			ulong serverTotalSeconds = Convert.ToUInt64(_ApiKeyService.GetTimestampString(DateTime.UtcNow));
+			ulong requestTotalSeconds = Convert.ToUInt64(requestTimeStamp);
+
+			if (serverTotalSeconds - requestTotalSeconds > RequestMaxAgeInSeconds)
+			{
+				return true;
+			}
+
+			ApplicationContext.ApplicationCache.RuntimeCache.InsertCacheItem(nonceCacheKey, () => nonce, TimeSpan.FromSeconds(RequestMaxAgeInSeconds));
+
+			return false;
 		}
 	}
 }
