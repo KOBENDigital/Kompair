@@ -98,13 +98,13 @@ More testing on earlier versions is planned and contributers are more than welco
 Testing on new releases will be performed as they come out.
 
 ## Changelog
-###0.1.3
+### 0.1.3
 - Removed Json.NET dependency from NuSpec as this will come from the UmbracoCms.Core dependency.
 - Removed UseImportMethod certificate config values as well as the logic.
 - Clean up.
 - README work.
 - Upped assembly version to 0.1.3.
-###0.1.2
+### 0.1.2
 - Added API key authentication method.
 - Modified code so the Auth mode is determined via a config value.
 - Performed clean up of namespace as old namespace was still in code.
