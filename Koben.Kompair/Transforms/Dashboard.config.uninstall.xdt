@@ -2,5 +2,8 @@
 <dashBoard xmlns:xdt="http://schemas.microsoft.com/XML-Document-Transform">
   <section alias="Koben.Kompair"
            xdt:Locator="Match(alias)"
+           xdt:Transform="InsertIfMissing" />
+  <section alias="Koben.Kompair"
+           xdt:Locator="Match(alias)"
            xdt:Transform="Remove" />
 </dashBoard>

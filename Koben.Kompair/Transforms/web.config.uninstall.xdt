@@ -1,0 +1,23 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<configuration xmlns:xdt="http://schemas.microsoft.com/XML-Document-Transform">
+  <appSettings>
+    <add xdt:Locator="Match(key)" xdt:Transform="InsertIfMissing" key="Kompair.Certificate.Thumbprint" value="" />
+    <add xdt:Locator="Match(key)" xdt:Transform="Remove" key="Kompair.Certificate.Thumbprint" value="" />
+    <add xdt:Locator="Match(key)" xdt:Transform="InsertIfMissing" key="Kompair.Certificate.StoreName" value="" />
+    <add xdt:Locator="Match(key)" xdt:Transform="Remove" key="Kompair.Certificate.StoreName" value="" />
+    <add xdt:Locator="Match(key)" xdt:Transform="InsertIfMissing" key="Kompair.Certificate.StoreLocation" value="" />
+    <add xdt:Locator="Match(key)" xdt:Transform="Remove" key="Kompair.Certificate.StoreLocation" value="" />
+    <add xdt:Locator="Match(key)" xdt:Transform="InsertIfMissing" key="Kompair.Certificate.ValidOnly" value="" />
+    <add xdt:Locator="Match(key)" xdt:Transform="Remove" key="Kompair.Certificate.ValidOnly" value="" />
+    <add xdt:Locator="Match(key)" xdt:Transform="InsertIfMissing" key="Kompair.ApiKey.ClientId" value="" />
+    <add xdt:Locator="Match(key)" xdt:Transform="Remove" key="Kompair.ApiKey.ClientId" value="" />
+    <add xdt:Locator="Match(key)" xdt:Transform="InsertIfMissing" key="Kompair.ApiKey.ClientSecret" value="" />
+    <add xdt:Locator="Match(key)" xdt:Transform="Remove" key="Kompair.ApiKey.ClientSecret" value="" />
+    <add xdt:Locator="Match(key)" xdt:Transform="InsertIfMissing" key="Kompair.ApiKey.ClientsConfigPath" value="" />
+    <add xdt:Locator="Match(key)" xdt:Transform="Remove" key="Kompair.ApiKey.ClientsConfigPath" value="" />
+    <add xdt:Locator="Match(key)" xdt:Transform="InsertIfMissing" key="Kompair.GetDocumentTypesForComparisonPath" value="" />
+    <add xdt:Locator="Match(key)" xdt:Transform="Remove" key="Kompair.GetDocumentTypesForComparisonPath" value="" />
+    <add xdt:Locator="Match(key)" xdt:Transform="InsertIfMissing" key="Kompair.AuthenticationMode" value="Certificate" />
+    <add xdt:Locator="Match(key)" xdt:Transform="Remove" key="Kompair.AuthenticationMode" value="Certificate" />
+  </appSettings>
+</configuration>

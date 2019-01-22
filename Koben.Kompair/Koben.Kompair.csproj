@@ -281,7 +281,8 @@
     <None Include="packages.config" />
     <None Include="Transforms\Dashboard.config.uninstall.xdt" />
     <None Include="Transforms\Dashboard.config.install.xdt" />
-    <None Include="Transforms\web.config.transform" />
+    <None Include="Transforms\web.config.uninstall.xdt" />
+    <None Include="Transforms\web.config.install.xdt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
