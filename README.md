@@ -33,31 +33,31 @@ Out of the box, Koben.Kompair will default to the highest Authentication mode wh
 Koben.Kompair also provides 2 AppSettings for users to use when working with custom routes or App_Plugins locations.
 
 - Kompair.ApiKey.ClientsConfigPath
--- Only use this if you have a custom location for storing the clients.json file.
+  - Only use this if you have a custom location for storing the clients.json file.
 - Kompair.GetDocumentTypesForComparisonPath
--- Only use this if your site has custom routing for umbraco API endpoints.
+  - Only use this if your site has custom routing for umbraco API endpoints.
 
 #### No Authentication
 No Authentication is exactly what it says, anyone and anything can call the Compare API endpoint. Using this mode in production is strongly discouraged.
 
 In order to disable the Kompair API authentication you will need make the following AppSettings modifications:
 - Kompair.AuthenticationMode
--- Update the value to "None" on all Umbraco instances you have installed Kompair on.
+  - Update the value to "None" on all Umbraco instances you have installed Kompair on.
 
 #### Api Key Authentication
 Api Key is the 2nd highest level of security. A shared key is used to authenticate an API consumer.
 
 In order to use Api Key authentication you will need make the following AppSettings modifications:
 - Kompair.AuthenticationMode
--- Update the value to "Key" on all Umbraco instances you have installed Kompair on.
+  - Update the value to "Key" on all Umbraco instances you have installed Kompair on.
 - Kompair.ApiKey.ClientId
--- Update the value to the client id this Umbraco instance will use when making a call to the Compare API endpoint on another Umbraco instance.
--- A matching ClientConfig item in the clients.json file on all Umbraco instances you want to allow this Umbraco instance to be able to make a call to their Compare endpoints. This is how a server knows what client secret to use for a client id.
+  - Update the value to the client id this Umbraco instance will use when making a call to the Compare API endpoint on another Umbraco instance.
+  - A matching ClientConfig item in the clients.json file on all Umbraco instances you want to allow this Umbraco instance to be able to make a call to their Compare endpoints. This is how a server knows what client secret to use for a client id.
 - Kompair.ApiKey.ClientSecret
--- Update the value to the client secret this Umbraco instance will use when making a call to the Compare API endpoint on another Umbraco instance.
--- A matching ClientConfig item in the clients.json file on all Umbraco instances you want to allow this Umbraco instance to be able to make a call to their Compare endpoints. This is how a server knows what client secret to use for a client id.
+  - Update the value to the client secret this Umbraco instance will use when making a call to the Compare API endpoint on another Umbraco instance.
+  - A matching ClientConfig item in the clients.json file on all Umbraco instances you want to allow this Umbraco instance to be able to make a call to their Compare endpoints. This is how a server knows what client secret to use for a client id.
 - Kompair.ApiKey.ClientsConfigPath
--- Only use this if you have a custom location for storing the clients.json file. It should be a relative path inside the AppDomain base directory. Better support for other locations could be added by a contributer.
+  - Only use this if you have a custom location for storing the clients.json file. It should be a relative path inside the AppDomain base directory. Better support for other locations could be added by a contributer.
 
 Clients will need to be registered on each Umbraco instance in order to be allowed to call the Compare API endpoint. This is done by:
 - Adding ClientConfig records to clients.json. This file can be found under App_Plugins\Koben.Kompair\data\clients.json.
@@ -71,14 +71,14 @@ Certificate Authentication is the highest level of security but the one that req
 In order to use Certificate authentication you will need make the following AppSettings modifications:
 
 - Kompair.Certificate.Thumbprint
--- Update the value with the thumbprint of the client certificate to use.
--- This is how the certificate is looked up by client and server.
+  - Update the value with the thumbprint of the client certificate to use.
+  - This is how the certificate is looked up by client and server.
 - Kompair.Certificate.StoreName
--- This is how the certificate is looked up by client and server.
+  - This is how the certificate is looked up by client and server.
 - Kompair.Certificate.StoreLocation
--- This is how the certificate is looked up by client and server.
+  - This is how the certificate is looked up by client and server.
 - Kompair.Certificate.ValidOnly
--- This indicates whether or not to only use valid certificates when adding it to an HTTP request. Defaults to true.
+  - This indicates whether or not to only use valid certificates when adding it to an HTTP request. Defaults to true.
 
 ## Known issues
 - Error message on dashboard needs to be styled.
@@ -87,9 +87,9 @@ In order to use Certificate authentication you will need make the following AppS
 - Informative tooltips for document types and property groups with a MatchStatus != Complete.
 - Scroll to next level down on click functionality for document types and property groups.
 - Better styling so matching rows are aligned. 
--- This will require some change however due to the potential complexity when both sites have items with a MatchStatus == None.
--- We might need to group items into a table per Match Status to acheive this.
--- Will create a basic mock up for input.
+  - This will require some change however due to the potential complexity when both sites have items with a MatchStatus == None.
+  - We might need to group items into a table per Match Status to acheive this.
+  - Will create a basic mock up for input.
 
 ## Umbraco Versions
 Kompair has been tested with Umbraco 7.13.0
