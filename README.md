@@ -102,7 +102,7 @@ Testing on new releases will be performed as they come out.
 ## Changelog
 ### 0.1.11
 - Styled error message.
-- Added better styling to the compar button.
+- Added better styling to the compare button.
 - README work.
 - Upped assembly version to 0.1.11.
 ### 0.1.10
