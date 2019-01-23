@@ -2,7 +2,7 @@
 Compare Umbraco instances and highlight document type or property editor differences.
 
 ## Introduction
-Koben.Kompair is a library for comparing document types, property groups and properties as well as property editors of two separate umbraco instances. 
+Koben.Kompair is a plugin for comparing document types, property groups and properties as well as property editors of two separate umbraco instances. 
 
 Users are able to easily compare sites through a Dashboard in the Backoffice.
 
