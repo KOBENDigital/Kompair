@@ -94,7 +94,9 @@ In order to use Certificate authentication you will need make the following AppS
   - Will create a basic mock up for input.
 
 ## Umbraco Versions
-Kompair has been tested with Umbraco 7.13.0
+Kompair has been tested with Umbraco versions:
+- 7.13.0
+- 7.13.1
 
 More testing on earlier versions is planned and contributers are more than welcome here :)
 Testing on new releases will be performed as they come out.
