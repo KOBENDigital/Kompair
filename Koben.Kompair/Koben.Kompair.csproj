@@ -274,6 +274,9 @@
     <None Include="App_Plugins\Koben.Kompair\data\clients.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Include="App_Plugins\Koben.Kompair\data\Web.config">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="App_Plugins\Koben.Kompair\package.manifest">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>

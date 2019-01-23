@@ -82,6 +82,7 @@ In order to use Certificate authentication you will need make the following AppS
 
 ## Known issues
 - Error message on dashboard needs to be styled.
+- client.json file can be accessed via a browser!
 
 ## Planned Features
 - Informative tooltips for document types and property groups with a MatchStatus != Complete.
@@ -98,6 +99,10 @@ More testing on earlier versions is planned and contributers are more than welco
 Testing on new releases will be performed as they come out.
 
 ## Changelog
+### 0.1.10
+- Added web config to App_Plugins\data\ to stop clients.json file being served via browser.
+- README work.
+- Upped assembly version to 0.1.10.
 ### 0.1.9
 - Nuspec work.
 - README work.
