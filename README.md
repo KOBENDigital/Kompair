@@ -100,6 +100,10 @@ More testing on earlier versions is planned and contributers are more than welco
 Testing on new releases will be performed as they come out.
 
 ## Changelog
+### 0.1.12
+- Removed web.config.uninstall.xdt from as it causes AppSettings to be replaced when upgrading versions.
+- README work.
+- Upped assembly version to 0.1.12.
 ### 0.1.11
 - Styled error message.
 - Added better styling to the compare button.
