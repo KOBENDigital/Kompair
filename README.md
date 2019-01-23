@@ -26,7 +26,8 @@ Download the code, compile it and copy the Kompair binary and the App_Plugins fo
 ## Configuration
 Once the plugin has been installed you will need to configure some AppSettings in the web config and potentially a json file if Api Key Authentication is used.
 
-### Kompair Configuration
+Please ensure that any configurations not used are removed or commented out from the web config.
+
 In order to protect the internals of your Umbraco instances, Koben.Kompair uses configuration values to determine what authentication method to use and perform the authentication operations. 
 
 Out of the box, Koben.Kompair will default to the highest Authentication mode which is Certificate base authentication.
