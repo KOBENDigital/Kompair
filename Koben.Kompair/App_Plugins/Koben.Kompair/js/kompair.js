@@ -40,6 +40,16 @@
           }
 
           vm.hasError = false;
+          vm.results = {
+            SourceDocumentTypes: [],
+            TargetDocumentTypes: [],
+            SourcePropertyGroups: [],
+            TargetPropertyGroups: [],
+            SourceProperties: [],
+            TargetProperties: [],
+            SourcePropertyEditors: [],
+            TargetPropertyEditors: []
+          };
 
           $http({
               url: kompairComparePath,

@@ -24,3 +24,13 @@
 .kompair-text {
 	width: 100%;
 }
+
+.kompair-error-message {
+	background-color: #ff9999;
+	padding: 1rem;
+	margin-bottom: 1rem;
+}
+
+.kompair-compare-button {
+	margin-bottom: 0.75rem;
+}

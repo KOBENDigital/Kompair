@@ -1,7 +1,7 @@
 ﻿<div ng-controller="kompair.dashboardController">
   <div class="kompair-header">
     <div class="kompair-error-message" ng-if="vm.hasError">
-      <div>{{vm.errorMessage}}</div>
+      <div><strong><em>{{vm.errorMessage}}</em></strong></div>
     </div>
     <form class="form ng-pristine ng-valid" novalidate>
       <div class="umb-table">
@@ -26,7 +26,7 @@
                      placeholder="http://... or https://.." prevent-enter-submit no-dirty-check />
             </div>
             <div class="umb-table-cell flx-s1 flx-g1 flx-b2">
-              <button type="button" class="umb-era-button umb-button--s -blue"
+              <button type="button" class="umb-era-button umb-button--s -blue kompair-compare-button"
                       ng-click="compare()">
                 Compare
               </button>
