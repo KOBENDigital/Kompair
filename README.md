@@ -26,7 +26,7 @@ Download the code, compile it and copy the Kompair binary and the App_Plugins fo
 ## Configuration
 Once the plugin has been installed you will need to configure some AppSettings in the web config and potentially a json file if Api Key Authentication is used.
 
-Please ensure that any configurations not used are removed or commented out from the web config.
+Please ensure that any Kompair configurations that are not used are commented out or removed from the web config.
 
 In order to protect the internals of your Umbraco instances, Koben.Kompair uses configuration values to determine what authentication method to use and perform the authentication operations. 
 
