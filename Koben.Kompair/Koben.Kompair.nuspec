@@ -22,9 +22,5 @@
   </metadata>
   <files>
     <file src="App_Plugins\Koben.Kompair\**\*.*" target="content\App_Plugins\Koben.Kompair\" />
-    <file src="Transforms\Dashboard.config.install.xdt" target="content" />
-    <file src="Transforms\Dashboard.config.uninstall.xdt" target="content" />
-    <file src="Transforms\web.config.install.xdt" target="content" />
-    <file src="Transforms\web.config.uninstall.xdt" target="content" />
   </files>
 </package>
