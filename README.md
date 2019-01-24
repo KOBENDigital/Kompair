@@ -84,7 +84,6 @@ In order to use Certificate authentication you will need make the following AppS
 ## Known issues
 
 ## Planned Features
-- Informative tooltips for document types and property groups with a MatchStatus != Complete.
 - Better styling so matching rows are aligned. 
   - This will require some change however due to the potential complexity when both sites have items with a MatchStatus == None.
   - We might need to group items into a table per Match Status to acheive this.
@@ -99,6 +98,10 @@ More testing on earlier versions is planned and contributers are more than welco
 Testing on new releases will be performed as they come out.
 
 ## Changelog
+### 0.1.14
+- Added informational tooltips. These are simple title tooltips.
+- README work.
+- Upped assembly version to 0.1.14.
 ### 0.1.13
 - Added scroll functionality so users can quickly navigate to a parents children.
 - README work.
