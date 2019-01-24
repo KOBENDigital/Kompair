@@ -55,7 +55,7 @@
             <div class="umb-table-body">
               <div class="umb-table-row kompair-row kompair-{{documentType.MatchStatus}}"
                    ng-repeat="documentType in vm.results.SourceDocumentTypes | orderBy: Alias">
-                <div class="umb-table-cell flx-s1 flx-g1 flx-b12 not-fixed">
+                <div class="umb-table-cell flx-s1 flx-g1 flx-b12 not-fixed" ng-click="scrollTo('source-' + documentType.Alias)">
                   <h4>{{documentType.Alias}}</h4>
                 </div>
               </div>
@@ -79,7 +79,7 @@
             <div class="umb-table-body">
               <div class="umb-table-row kompair-row kompair-{{documentType.MatchStatus}}"
                    ng-repeat="documentType in vm.results.TargetDocumentTypes | orderBy: Alias">
-                <div class="umb-table-cell flx-s1 flx-g1 flx-b12 not-fixed">
+                <div class="umb-table-cell flx-s1 flx-g1 flx-b12 not-fixed" ng-click="scrollTo('target-' + documentType.Alias)">
                   <h4>{{documentType.Alias}}</h4>
                 </div>
               </div>
@@ -107,8 +107,9 @@
             </div>
             <div class="umb-table-body">
               <div class="umb-table-row kompair-row kompair-{{propertyGroup.MatchStatus}}"
-                   ng-repeat="propertyGroup in vm.results.SourcePropertyGroups | orderBy: ['DocumentTypeAlias', 'Name']">
-                <div class="umb-table-cell flx-s1 flx-g1 flx-b12 not-fixed">
+                   ng-repeat="propertyGroup in vm.results.SourcePropertyGroups | orderBy: ['DocumentTypeAlias', 'Name']"
+                   id="{{$index == 0 ? 'source-' + propertyGroup.DocumentTypeAlias : 'source-' + propertyGroup.Name}}">
+                <div class="umb-table-cell flx-s1 flx-g1 flx-b12 not-fixed" ng-click="scrollTo('source-' + documentType.Alias + '.' + property.PropertyGroupName)">
                   <h4>{{propertyGroup.DocumentTypeAlias}}.{{propertyGroup.Name}}</h4>
                 </div>
               </div>
@@ -131,8 +132,9 @@
             </div>
             <div class="umb-table-body">
               <div class="umb-table-row kompair-row kompair-{{propertyGroup.MatchStatus}}"
-                   ng-repeat="propertyGroup in vm.results.TargetPropertyGroups | orderBy: ['DocumentTypeAlias', 'Name']">
-                <div class="umb-table-cell flx-s1 flx-g1 flx-b12 not-fixed">
+                   ng-repeat="propertyGroup in vm.results.TargetPropertyGroups | orderBy: ['DocumentTypeAlias', 'Name']"
+                   id="{{$index == 0 ? 'target-' + propertyGroup.DocumentTypeAlias : 'target-' + propertyGroup.Name}}">
+                <div class="umb-table-cell flx-s1 flx-g1 flx-b12 not-fixed" ng-click="scrollTo('target-' + documentType.Alias + '.' + property.PropertyGroupName)">
                   <h4>{{propertyGroup.DocumentTypeAlias}}.{{propertyGroup.Name}}</h4>
                 </div>
               </div>
@@ -160,7 +162,8 @@
             </div>
             <div class="umb-table-body">
               <div class="umb-table-row kompair-row kompair-{{property.MatchStatus}}"
-                   ng-repeat="property in vm.results.SourceProperties | orderBy: ['DocumentTypeAlias', 'PropertyGroupName', 'Alias']">
+                   ng-repeat="property in vm.results.SourceProperties | orderBy: ['DocumentTypeAlias', 'PropertyGroupName', 'Alias']"
+                   id="{{$index == 0 ? 'source-' + propertyGroup.DocumentTypeAlias + '.' + property.PropertyGroupName : 'source-' + propertyGroup.Name}}">
                 <div class="umb-table-cell flx-s1 flx-g1 flx-b12 not-fixed">
                   <h4>{{property.DocumentTypeAlias}}.{{property.PropertyGroupName}}.{{property.Alias}}</h4>
                 </div>
@@ -184,7 +187,8 @@
             </div>
             <div class="umb-table-body">
               <div class="umb-table-row kompair-row kompair-{{property.MatchStatus}}"
-                   ng-repeat="property in vm.results.TargetProperties | orderBy: ['DocumentTypeAlias', 'PropertyGroupName', 'Alias']">
+                   ng-repeat="property in vm.results.TargetProperties | orderBy: ['DocumentTypeAlias', 'PropertyGroupName', 'Alias']"
+                   id="{{$index == 0 ? 'target-' + propertyGroup.DocumentTypeAlias + '.' + property.PropertyGroupName : 'target-' + propertyGroup.Name}}">
                 <div class="umb-table-cell flx-s1 flx-g1 flx-b12 not-fixed">
                   <h4>{{property.DocumentTypeAlias}}.{{property.PropertyGroupName}}.{{property.Alias}}</h4>
                 </div>

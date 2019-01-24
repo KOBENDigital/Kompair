@@ -4,7 +4,7 @@
   .controller("kompair.dashboardController",
     [
       "$scope", "$http", "$location", "kompairComparePath",
-      function($scope, $http, $location, kompairComparePath) {
+      function ($scope, $http, $location, kompairComparePath) {
         var vm = this;
         vm.sourceSite = $location.protocol() + "://" + $location.host() + ($location.port() === 80 ? "" : (":" + $location.port()));
         vm.targetSite = null;
@@ -67,6 +67,21 @@
 
         $scope.propertyEditorOrderBy = function(propertyEditor) {
           return propertyEditor.Alias.replace("Umbraco.", "");
-        }
+        };
+
+        $scope.scrollTo = function (scrollTarget) {
+          var target = $("#" + scrollTarget);
+          var container = $(".umb-editor-container.umb-panel-body.umb-scrollable");
+
+          if (!target) {
+            return;
+          }
+
+          if (!container) {
+            return;
+          }
+
+          container.scrollTop = target.offsetTop;
+        };
       }
     ]);
