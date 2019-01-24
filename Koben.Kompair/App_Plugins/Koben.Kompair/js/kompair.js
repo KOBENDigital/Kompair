@@ -23,8 +23,8 @@
         vm.errorMessage = null;
 
         var hostRegex =
-        /^http(s?):\/\/(([a-zA-Z0-9]|[a-zA-Z0-9][a-zA-Z0-9\-]*[a-zA-Z0-9])\.)*([A-Za-z0-9]|[A-Za-z0-9][A-Za-z0-9\-]*[A-Za-z0-9])(:\d+)?(\/?)$/i;
-        
+          /^http(s?):\/\/(([a-zA-Z0-9]|[a-zA-Z0-9][a-zA-Z0-9\-]*[a-zA-Z0-9])\.)*([A-Za-z0-9]|[A-Za-z0-9][A-Za-z0-9\-]*[A-Za-z0-9])(:\d+)?(\/?)$/i;
+
         $scope.vm = vm;
         $scope.compare = function () {
           if (!vm.targetSite) {
@@ -52,10 +52,10 @@
           };
 
           $http({
-              url: kompairComparePath,
-              method: "POST",
-              data: { targetUrl: vm.targetSite }
-            })
+            url: kompairComparePath,
+            method: "POST",
+            data: { targetUrl: vm.targetSite }
+          })
             .success(function (result) {
               vm.results = result;
             })
@@ -65,23 +65,27 @@
             });
         };
 
-        $scope.propertyEditorOrderBy = function(propertyEditor) {
+        $scope.propertyEditorOrderBy = function (propertyEditor) {
           return propertyEditor.Alias.replace("Umbraco.", "");
         };
 
         $scope.scrollTo = function (scrollTarget) {
-          var target = $("#" + scrollTarget);
+          var target = $("." + scrollTarget);
           var container = $(".umb-editor-container.umb-panel-body.umb-scrollable");
 
-          if (!target) {
+          if (!target || target.length < 1) {
             return;
           }
 
-          if (!container) {
+          if (!container || container.length < 1) {
             return;
           }
 
-          container.scrollTop = target.offsetTop;
+          target[0].scrollIntoView();
+
+          //container.animate({
+          //  scrollTop: ($(target[0]).offset().top) + 'px'
+          //}, 300);
         };
       }
     ]);
