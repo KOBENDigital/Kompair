@@ -18,7 +18,7 @@ You can run the following command from within Visual Studio:
     PM> Install-Package Koben.Kompair
 
 ### Umbraco Package
-TBD
+https://our.umbraco.com/packages/backoffice-extensions/kompair/
 
 ### Manually
 Download the code, compile it and copy the Kompair binary and the App_Plugins folder into your Umbraco website App_Plugin folder.
