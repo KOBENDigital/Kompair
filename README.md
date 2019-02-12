@@ -88,6 +88,7 @@ In order to use Certificate authentication you will need make the following AppS
   - This will require some change however due to the potential complexity when both sites have items with a MatchStatus == None.
   - We might need to group items into a table per Match Status to acheive this.
   - Will create a basic mock up for input.
+- DI friendly controllers.
 
 ## Umbraco Versions
 Kompair has been tested with Umbraco versions:
