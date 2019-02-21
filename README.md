@@ -94,11 +94,16 @@ In order to use Certificate authentication you will need make the following AppS
 Kompair has been tested with Umbraco versions:
 - 7.13.0
 - 7.13.1
+- 7.10.0
 
 More testing on earlier versions is planned and contributers are more than welcome here :)
 Testing on new releases will be performed as they come out.
 
 ## Changelog
+### 0.1.15
+- Reduced the version of the Umbraco.Core dependency from 7.13.0 to 7.10.0 to accomodate older versions without forcing update.
+- README work.
+- Upped assembly version to 0.1.15.
 ### 0.1.14
 - Added informational tooltips. These are simple title tooltips.
 - README work.

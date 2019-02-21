@@ -14,7 +14,7 @@
     <copyright>Copyright 2019</copyright>
     <tags>umbraco</tags>
     <dependencies>
-      <dependency id="UmbracoCms.Core" version="[7.13,]" />
+      <dependency id="UmbracoCms.Core" version="[7.10,]" />
     </dependencies>
     <frameworkAssemblies>
       <frameworkAssembly assemblyName="System.Web" />
