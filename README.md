@@ -100,8 +100,12 @@ More testing on earlier versions is planned and contributers are more than welco
 Testing on new releases will be performed as they come out.
 
 ## Changelog
+### 0.1.16
+- Reduced the version of the Umbraco.Core dependency from 7.10.0 to 7.0.0 to accommodate older versions without forcing update.
+- README work.
+- Upped assembly version to 0.1.16.
 ### 0.1.15
-- Reduced the version of the Umbraco.Core dependency from 7.13.0 to 7.10.0 to accomodate older versions without forcing update.
+- Reduced the version of the Umbraco.Core dependency from 7.13.0 to 7.10.0 to accommodate older versions without forcing update.
 - README work.
 - Upped assembly version to 0.1.15.
 ### 0.1.14
