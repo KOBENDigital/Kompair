@@ -14,7 +14,8 @@
     <copyright>Copyright 2019</copyright>
     <tags>umbraco</tags>
     <dependencies>
-      <dependency id="UmbracoCms.Core" version="[7.4,]" />
+      <dependency id="UmbracoCms.Core" version="7.4.0" />
+      <dependency id="Koben.Kompair" version="0.1.17" />
     </dependencies>
     <frameworkAssemblies>
       <frameworkAssembly assemblyName="System.Web" />
