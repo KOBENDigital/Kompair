@@ -1,0 +1,58 @@
+stages:
+- build
+- publish
+- deploy
+
+build_job:
+  stage: build
+  except:
+    - master
+  script:
+    - 'set MSBUILDDISABLENODEREUSE=1'
+    - 'echo Restoring NuGet Packages...'
+    - '"c:\nuget\nuget.exe" restore "Koben.Kompair.sln"'
+    - 'echo NuGet Packages restored'
+    - 'echo Debug build...'
+    - '"C:\Program Files (x86)\Microsoft Visual Studio\2017\BuildTools\MSBuild\15.0\Bin\msbuild.exe" /consoleloggerparameters:ErrorsOnly /maxcpucount /nologo /property:Configuration=Debug /verbosity:quiet /m:4 /nr:false "Koben.Kompair.sln"'
+    - 'echo Build completed'
+    - 'echo Cleaning up..'
+    - 'DEL /Q "."'
+    - 'echo Build cleaned'
+
+publish_job:
+  stage: publish
+  only:
+    - master
+  script:
+    - 'set MSBUILDDISABLENODEREUSE=1'
+    - 'echo Restoring NuGet Packages...'
+    - '"c:\nuget\nuget.exe" restore "Koben.Kompair.sln"'
+    - 'echo NuGet Packages restored'
+    - 'echo Release build...'
+    - '"C:\Program Files (x86)\Microsoft Visual Studio\2017\BuildTools\MSBuild\15.0\Bin\msbuild.exe" /consoleloggerparameters:ErrorsOnly /maxcpucount /nologo /property:Configuration=Release /verbosity:quiet /m:4 /nr:false "Koben.Kompair.sln"'
+    - 'echo Build completed'
+    - 'Creating Umbraco Package'
+    - '.\CreateUmbracoPackage.ps1 .\Koben.Kompair.Dashboard\ Release'
+  artifacts:
+    name: Koben.Kompair
+    paths:
+    - 'Koben.Kompair\bin\Release'
+    - 'Koben.Kompair.Dashboard\bin\Release'
+    - 'Koben.Kompair.zip'
+
+deploy_job:
+  stage: deploy
+  only:
+    - tags
+  script:  
+    - 'echo Deploying NuGet Package...'
+    - 'cd Koben.Kompair\'
+    - '"c:\nuget\nuget.exe" pack Koben.Kompair.csproj -Prop Configuration=Release'
+    - '"c:\nuget\nuget.exe" push Koben.Kompair.*.nupkg -Source https://api.nuget.org/v3/index.json'
+    - 'cd ..'
+    - 'cd Koben.Kompair.Dashboard\'
+    - '"c:\nuget\nuget.exe" pack Koben.Kompair.Dashboard.csproj -Prop Configuration=Release'
+    - '"c:\nuget\nuget.exe" push Koben.Kompair.Dashboard.*.nupkg -Source https://api.nuget.org/v3/index.json'
+    - 'echo NuGet Package deployed'
+  dependencies:
+    - publish_job
