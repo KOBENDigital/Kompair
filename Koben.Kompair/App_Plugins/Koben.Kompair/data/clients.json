@@ -1,8 +1,0 @@
-{
-  "Clients": [
-    //Add client records using the template below.
-    //This file only needs populating on instances that will allow other sites to compare against it.
-    //For example if the server will only ever be a "Source" and never a "Target", it will not need this file.
-    //{"ClientId": "", "ClientSecret": ""}
-  ]
-}

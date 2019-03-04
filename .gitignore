@@ -259,3 +259,5 @@ paket-files/
 # Python Tools for Visual Studio (PTVS)
 __pycache__/
 *.pyc
+/Koben.Kompair.Example2/Web.config
+/Koben.Kompair.Example1/Web.config

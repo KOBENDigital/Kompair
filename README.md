@@ -95,11 +95,19 @@ Kompair has been tested with Umbraco versions:
 - 7.13.0
 - 7.13.1
 - 7.10.0
+- 7.4.0
 
 More testing on earlier versions is planned and contributers are more than welcome here :)
 Testing on new releases will be performed as they come out.
 
 ## Changelog
+### 0.1.17
+- Split the project into two Separate projects, Koben.Kompair and Koben.Kompair.Dashboard.
+- Corrected targetted versions. Koben.Kompair targets Umbraco 7.0.0 whereas Koben.Kompair.Dashboard targets 7.4.0. We want our controllers to work for earliest as possible without changing code as there was a change from IActionResult to IHttpActionResult during early versions of 7.
+- Added example projects so users can download code and spin it up to see what the go is.
+- Added my own flex box styling utils so styling can be maintained in older versions before the built in flex utils were added.
+- README work.
+- Upped assembly version to 0.1.17.
 ### 0.1.16
 - Reduced the version of the Umbraco.Core dependency from 7.10.0 to 7.0.0 to accommodate older versions without forcing update.
 - README work.

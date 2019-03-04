@@ -1,0 +1,8 @@
+{
+  "javascript": [
+    "~/app_plugins/Koben.Kompair/js/kompair.js"
+  ],
+  "css": [
+    "~/app_plugins/Koben.Kompair/css/kompair.css"
+  ]
+}

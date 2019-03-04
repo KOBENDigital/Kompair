@@ -1,0 +1,29 @@
+<?xml version="1.0"?>
+<package >
+  <metadata>
+    <id>$id$</id>
+    <version>$version$</version>
+    <title>$title$</title>
+    <authors>EwneoN</authors>
+    <owners>KØben Digital</owners>
+    <licenseUrl>http://opensource.org/licenses/MIT</licenseUrl>
+    <projectUrl>https://github.com/KOBENDigital/Kompair</projectUrl>
+    <iconUrl>https://koben.com.au/media/1047/koben_logo.png</iconUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>Koben.Kompair.Dashboard is an Umbraco dashboard for the Koben.Kompair library.</description>
+    <copyright>Copyright 2019</copyright>
+    <tags>umbraco</tags>
+    <dependencies>
+      <dependency id="UmbracoCms.Core" version="[7.4,]" />
+    </dependencies>
+    <frameworkAssemblies>
+      <frameworkAssembly assemblyName="System.Web" />
+    </frameworkAssemblies>
+  </metadata>
+  <files>
+    <file src="App_Plugins\Koben.Kompair\**\*.*" target="content\App_Plugins\Koben.Kompair\" />
+    <file src="Transforms\Dashboard.config.install.xdt" target="content\Config" />
+    <file src="Transforms\Dashboard.config.uninstall.xdt" target="content\Config" />
+    <file src="Transforms\web.config.install.xdt" target="content" />
+  </files>
+</package>

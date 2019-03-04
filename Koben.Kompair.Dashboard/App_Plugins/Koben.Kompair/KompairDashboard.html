@@ -1,0 +1,304 @@
+﻿<div ng-controller="kompair.dashboardController">
+<div class="kompair-header">
+  <div class="kompair-error-message" ng-if="vm.hasError">
+    <div>
+      <strong>
+        <em>{{vm.errorMessage}}</em>
+      </strong>
+    </div>
+  </div>
+  <form class="form ng-pristine ng-valid" novalidate>
+    <div class="umb-table">
+      <div class="umb-table-head">
+        <div class="umb-table-row">
+          <div class="umb-table-cell kompair-flx-b4">
+            Source Site
+          </div>
+          <div class="umb-table-cell kompair-flx-b4">
+            Target Site
+          </div>
+          <div class="umb-table-cell kompair-flx-b2"></div>
+        </div>
+      </div>
+      <div class="umb-table-body">
+        <div class="umb-table-row">
+          <div class="umb-table-cell kompair-flx-b4">
+            {{vm.sourceSite}}
+          </div>
+          <div class="umb-table-cell kompair-flx-b4">
+            <input type="text" class="kompair-text form-control ng-pristine ng-valid" ng-model="vm.targetSite"
+                   placeholder="http://... or https://.." prevent-enter-submit no-dirty-check/>
+          </div>
+          <div class="umb-table-cell kompair-flx-b2">
+            <button type="button" class="umb-era-button umb-button--s -blue kompair-compare-button"
+                    ng-click="compare()">
+              Compare
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </form>
+</div>
+<div class="kompair-panel">
+  <h3>Comparison Summary</h3>
+  <div class="umb-table">
+    <div class="umb-table-head">
+      <div class="umb-table-row">
+        <div class="umb-table-cell kompair-flx-b5 not-fixed">
+          Comparison Type
+        </div>
+        <div class="umb-table-cell kompair-flx-b5">
+          Comparison Failures
+        </div>
+      </div>
+    </div>
+    <div class="umb-table-body">
+      <div class="umb-table-row">
+        <div class="umb-table-cell kompair-flx-b5">
+          Document Type
+        </div>
+        <div class="umb-table-cell kompair-flx-b5">
+          {{getComparisonFailureCount(vm.results.SourceDocumentTypes)}}
+        </div>
+      </div>
+      <div class="umb-table-row">
+        <div class="umb-table-cell kompair-flx-b5">
+          Property Group
+        </div>
+        <div class="umb-table-cell kompair-flx-b5">
+          {{getComparisonFailureCount(vm.results.SourcePropertyGroups)}}
+        </div>
+      </div>
+      <div class="umb-table-row">
+        <div class="umb-table-cell kompair-flx-b5">
+          Property Type
+        </div>
+        <div class="umb-table-cell kompair-flx-b5">
+          {{getComparisonFailureCount(vm.results.SourceProperties)}}
+        </div>
+      </div>
+      <div class="umb-table-row">
+        <div class="umb-table-cell kompair-flx-b5">
+          Property Editor
+        </div>
+        <div class="umb-table-cell kompair-flx-b5">
+          {{getComparisonFailureCount(vm.results.SourcePropertyEditors)}}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="kompair-panel">
+  <h3>Document Type Comparison Results</h3>
+  <div class="kompair-container">
+    <div class="kompair-flex">
+      <div>
+        <h4>Source Site</h4>
+      </div>
+      <div>
+        <div class="umb-table">
+          <div class="umb-table-head">
+            <div class="umb-table-row">
+              <div class="umb-table-cell kompair-flx-b10">
+                Alias
+              </div>
+            </div>
+          </div>
+          <div class="umb-table-body">
+            <div class="umb-table-row kompair-row kompair-{{documentType.MatchStatus}}"
+                 ng-repeat="documentType in vm.results.SourceDocumentTypes | orderBy: Alias">
+              <div class="umb-table-cell kompair-flx-b10" ng-click="scrollTo('source-' + documentType.Alias)" title="{{getToolTip(documentType)}}">
+                <h4>{{documentType.Alias}}</h4>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="kompair-flex">
+      <div>
+        <h4>Target Site</h4>
+      </div>
+      <div>
+        <div class="umb-table">
+          <div class="umb-table-head">
+            <div class="umb-table-row">
+              <div class="umb-table-cell kompair-flx-b10">
+                Alias
+              </div>
+            </div>
+          </div>
+          <div class="umb-table-body">
+            <div class="umb-table-row kompair-row kompair-{{documentType.MatchStatus}}"
+                 ng-repeat="documentType in vm.results.TargetDocumentTypes | orderBy: Alias">
+              <div class="umb-table-cell kompair-flx-b10" ng-click="scrollTo('target-' + documentType.Alias)" title="{{getToolTip(documentType)}}">
+                <h4>{{documentType.Alias}}</h4>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="kompair-panel">
+  <h3>Property Group Comparison Results</h3>
+  <div class="kompair-container">
+    <div class="kompair-flex">
+      <div>
+        <h4>Source Site</h4>
+      </div>
+      <div>
+        <div class="umb-table">
+          <div class="umb-table-head">
+            <div class="umb-table-row">
+              <div class="umb-table-cell kompair-flx-b10">
+                Name
+              </div>
+            </div>
+          </div>
+          <div class="umb-table-body">
+            <div class="umb-table-row kompair-row kompair-{{propertyGroup.MatchStatus}} {{'source-' + propertyGroup.DocumentTypeAlias}}"
+                 ng-repeat="propertyGroup in vm.results.SourcePropertyGroups | orderBy: ['DocumentTypeAlias', 'Name']">
+              <div class="umb-table-cell kompair-flx-b10" ng-click="scrollTo('source-' + propertyGroup.DocumentTypeAlias + '-' + propertyGroup.Name)" title="{{getToolTip(propertyGroup)}}">
+                <h4>{{propertyGroup.DocumentTypeAlias}}.{{propertyGroup.Name}}</h4>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="kompair-flex">
+      <div>
+        <h4>Target Site</h4>
+      </div>
+      <div>
+        <div class="umb-table">
+          <div class="umb-table-head">
+            <div class="umb-table-row">
+              <div class="umb-table-cell kompair-flx-b10">
+                Name
+              </div>
+            </div>
+          </div>
+          <div class="umb-table-body">
+            <div class="umb-table-row kompair-row kompair-{{propertyGroup.MatchStatus}}" {{'target-' + propertyGroup.DocumentTypeAlias}}
+                 ng-repeat="propertyGroup in vm.results.TargetPropertyGroups | orderBy: ['DocumentTypeAlias', 'Name']">
+              <div class="umb-table-cell kompair-flx-b10" ng-click="scrollTo('target-' + propertyGroup.DocumentTypeAlias + '-' + propertyGroup.Name)" title="{{getToolTip(propertyGroup)}}">
+                <h4>{{propertyGroup.DocumentTypeAlias}}.{{propertyGroup.Name}}</h4>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="kompair-panel">
+  <h3>Property Comparison Results</h3>
+  <div class="kompair-container">
+    <div class="kompair-flex">
+      <div>
+        <h4>Source Site</h4>
+      </div>
+      <div>
+        <div class="umb-table">
+          <div class="umb-table-head">
+            <div class="umb-table-row">
+              <div class="umb-table-cell kompair-flx-b10">
+                Alias
+              </div>
+            </div>
+          </div>
+          <div class="umb-table-body">
+            <div class="umb-table-row kompair-row kompair-{{property.MatchStatus}} {{'source-' + property.DocumentTypeAlias + '-' + property.PropertyGroupName}}"
+                 ng-repeat="property in vm.results.SourceProperties | orderBy: ['DocumentTypeAlias', 'PropertyGroupName', 'Alias']" title="{{getToolTip(property)}}">
+              <div class="umb-table-cell kompair-flx-b10">
+                <h4>{{property.DocumentTypeAlias}}.{{property.PropertyGroupName}}.{{property.Alias}}</h4>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="kompair-flex">
+      <div>
+        <h4>Target Site</h4>
+      </div>
+      <div>
+        <div class="umb-table">
+          <div class="umb-table-head">
+            <div class="umb-table-row">
+              <div class="umb-table-cell kompair-flx-b10">
+                Alias
+              </div>
+            </div>
+          </div>
+          <div class="umb-table-body">
+            <div class="umb-table-row kompair-row kompair-{{property.MatchStatus}} {{'target-' + property.DocumentTypeAlias + '-' + property.PropertyGroupName}}"
+                 ng-repeat="property in vm.results.TargetProperties | orderBy: ['DocumentTypeAlias', 'PropertyGroupName', 'Alias']" title="{{getToolTip(property)}}">
+              <div class="umb-table-cell kompair-flx-b10">
+                <h4>{{property.DocumentTypeAlias}}.{{property.PropertyGroupName}}.{{property.Alias}}</h4>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="kompair-panel">
+  <h3>Property Editor Comparison Results</h3>
+  <div class="kompair-container">
+    <div class="kompair-flex">
+      <div>
+        <h4>Source Site</h4>
+      </div>
+      <div>
+        <div class="umb-table">
+          <div class="umb-table-head">
+            <div class="umb-table-row">
+              <div class="umb-table-cell kompair-flx-b10">
+                Alias
+              </div>
+            </div>
+          </div>
+          <div class="umb-table-body">
+            <div class="umb-table-row kompair-row kompair-{{propertyEditor.MatchStatus}}"
+                 ng-repeat="propertyEditor in vm.results.SourcePropertyEditors | orderBy: propertyEditorOrderBy" title="{{getToolTip(propertyEditor)}}">
+              <div class="umb-table-cell kompair-flx-b10">
+                <h4>{{propertyEditor.Alias}}</h4>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="kompair-flex">
+      <div>
+        <h4>Target Site</h4>
+      </div>
+      <div>
+        <div class="umb-table">
+          <div class="umb-table-head">
+            <div class="umb-table-row">
+              <div class="umb-table-cell kompair-flx-b10">
+                Alias
+              </div>
+            </div>
+          </div>
+          <div class="umb-table-body">
+            <div class="umb-table-row kompair-row kompair-{{propertyEditor.MatchStatus}}"
+                 ng-repeat="propertyEditor in vm.results.TargetPropertyEditors | orderBy: propertyEditorOrderBy" title="{{getToolTip(propertyEditor)}}">
+              <div class="umb-table-cell kompair-flx-b10">
+                <h4>{{propertyEditor.Alias}}</h4>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</div>

@@ -1,0 +1,76 @@
+﻿div.kompair-panel h3 {
+	text-decoration: underline;
+}
+
+.kompair-None {
+	background-color: #ff9999;
+}
+
+.kompair-Partial {
+	background-color: #ffc299;
+}
+
+.kompair-Complete {
+	background-color: #adebad;
+}
+
+.kompair-container{
+	display: flex;
+}
+.kompair-flex {
+	flex-grow: 1;
+}
+
+.kompair-text {
+	width: 100%;
+}
+
+.kompair-error-message {
+	background-color: #ff9999;
+	padding: 1rem;
+	margin-bottom: 1rem;
+}
+
+.kompair-compare-button {
+	margin-bottom: 0.75rem;
+}
+
+.kompair-flx-b1 {
+	flex-basis: 10% !important;
+}
+
+.kompair-flx-b2 {
+	flex-basis: 20% !important;
+}
+
+.kompair-flx-b3 {
+	flex-basis: 30% !important;
+}
+
+.kompair-flx-b4 {
+	flex-basis: 40% !important;
+}
+
+.kompair-flx-b5 {
+	flex-basis: 50% !important;
+}
+
+.kompair-flx-b6 {
+	flex-basis: 60% !important;
+}
+
+.kompair-flx-b7 {
+	flex-basis: 70% !important;
+}
+
+.kompair-flx-b8 {
+	flex-basis: 80% !important;
+}
+
+.kompair-flx-b9 {
+	flex-basis: 90% !important;
+}
+
+.kompair-flx-b10 {
+	flex-basis: 100% !important;
+}
