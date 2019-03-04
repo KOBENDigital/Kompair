@@ -6,6 +6,7 @@ stages:
 build_job:
   stage: build
   except:
+    - tags
     - master
   script:
     - 'set MSBUILDDISABLENODEREUSE=1'
