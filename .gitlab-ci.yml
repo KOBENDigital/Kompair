@@ -33,7 +33,7 @@ publish_job:
     - 'echo Release build...'
     - '"C:\Program Files (x86)\Microsoft Visual Studio\2017\BuildTools\MSBuild\15.0\Bin\msbuild.exe" /consoleloggerparameters:ErrorsOnly /maxcpucount /nologo /property:Configuration=Release /verbosity:quiet /m:4 /nr:false "Koben.Kompair.sln"'
     - 'echo Build completed'
-    - 'Creating Umbraco Package'
+    - 'echo Creating Umbraco Package'
     - '.\CreateUmbracoPackage.ps1 .\Koben.Kompair.Dashboard\ Release'
   artifacts:
     name: Koben.Kompair
