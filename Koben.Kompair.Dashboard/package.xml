@@ -1,0 +1,93 @@
+﻿<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<umbPackage>
+  <files>
+    <file>
+      <guid>Koben.Kompair.dll</guid>
+      <orgPath>/bin</orgPath>
+      <orgName>Koben.Kompair.dll</orgName>
+    </file>
+    <file>
+      <guid>Koben.Kompair.Dashboard.dll</guid>
+      <orgPath>/bin</orgPath>
+      <orgName>Koben.Kompair.Dashboard.dll</orgName>
+    </file>
+    <file>
+      <guid>KompairDashboard.html</guid>
+      <orgPath>/App_Plugins/Koben.Kompair</orgPath>
+      <orgName>KompairDashboard.html</orgName>
+    </file>
+    <file>
+      <guid>package.manifest</guid>
+      <orgPath>/App_Plugins/Koben.Kompair</orgPath>
+      <orgName>package.manifest</orgName>
+    </file>
+    <file>
+      <guid>kompair.css</guid>
+      <orgPath>/App_Plugins/Koben.Kompair/css</orgPath>
+      <orgName>kompair.css</orgName>
+    </file>
+    <file>
+      <guid>clients.json</guid>
+      <orgPath>/App_Plugins/Koben.Kompair/data</orgPath>
+      <orgName>clients.json</orgName>
+    </file>
+    <file>
+      <guid>Web.config</guid>
+      <orgPath>/App_Plugins/Koben.Kompair/data</orgPath>
+      <orgName>Web.config</orgName>
+    </file>
+    <file>
+      <guid>kompair.js</guid>
+      <orgPath>/App_Plugins/Koben.Kompair/js</orgPath>
+      <orgName>kompair.js</orgName>
+    </file>
+  </files>
+  <info>
+    <package>
+      <name>Koben.Kompair</name>
+      <version>{version}</version>
+      <iconUrl>https://koben.com.au/media/1047/koben_logo.png</iconUrl>
+      <license url="http://opensource.org/licenses/MIT">MIT License</license>
+      <url>https://github.com/KOBENDigital/Kompair</url>
+      <requirements type="strict">
+        <major>7</major>
+        <minor>4</minor>
+        <patch>0</patch>
+      </requirements>
+    </package>
+    <author>
+      <name>EwneoN</name>
+      <website>https://www.koben.com.au</website>
+    </author>
+    <readme><![CDATA[Readme found here:
+https://github.com/KOBENDigital/Kompair]]></readme>
+  </info>
+  <DocumentTypes />
+  <Templates />
+  <Stylesheets />
+  <Macros />
+  <DictionaryItems />
+  <Languages />
+  <DataTypes />
+  <Actions>
+    <Action runat="install" undo="true" alias="addDashboardSection" dashboardAlias="KompairDashboardSection">
+      <section alias="Koben.Kompair">
+        <areas>
+          <area>settings</area>
+        </areas>
+        <tab caption="Kompair">
+          <control>/App_Plugins/Koben.Kompair/KompairDashboard.html</control>
+        </tab>
+      </section>
+    </Action>
+    <Action runat="install" undo="true" alias="AddAppConfigKey" key="Kompair.Certificate.Thumbprint" value="" />
+    <Action runat="install" undo="true" alias="AddAppConfigKey" key="Kompair.Certificate.StoreName" value="" />
+    <Action runat="install" undo="true" alias="AddAppConfigKey" key="Kompair.Certificate.StoreLocation" value="" />
+    <Action runat="install" undo="true" alias="AddAppConfigKey" key="Kompair.Certificate.ValidOnly" value="" />
+    <Action runat="install" undo="true" alias="AddAppConfigKey" key="Kompair.ApiKey.ClientId" value="" />
+    <Action runat="install" undo="true" alias="AddAppConfigKey" key="Kompair.ApiKey.ClientSecret" value="example" />
+    <Action runat="install" undo="true" alias="AddAppConfigKey" key="Kompair.ApiKey.ClientsConfigPath" value="example-secret" />
+    <Action runat="install" undo="true" alias="AddAppConfigKey" key="Kompair.GetDocumentTypesForComparisonPath" value="" />
+    <Action runat="install" undo="true" alias="AddAppConfigKey" key="Kompair.AuthenticationMode" value="Key" />
+  </Actions>
+</umbPackage>

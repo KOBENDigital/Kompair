@@ -101,6 +101,12 @@ More testing on earlier versions is planned and contributers are more than welco
 Testing on new releases will be performed as they come out.
 
 ## Changelog
+### 0.1.18
+- Added gitlab ci config so my gitlab mirror can handle deployments for me.
+- Added packaging script so CI can create umbraco packages for me.
+- Added base package.xml file
+- README work.
+- Upped assembly version to 0.1.18.
 ### 0.1.17
 - Split the project into two Separate projects, Koben.Kompair and Koben.Kompair.Dashboard.
 - Corrected targetted versions. Koben.Kompair targets Umbraco 7.0.0 whereas Koben.Kompair.Dashboard targets 7.4.0. We want our controllers to work for earliest as possible without changing code as there was a change from IActionResult to IHttpActionResult during early versions of 7.

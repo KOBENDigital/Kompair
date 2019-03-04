@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Koben.Kompair", "Koben.Komp
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{56BEE178-096F-44AA-B824-B6AD2D328F47}"
 	ProjectSection(SolutionItems) = preProject
+		..\McArthur\.gitlab-ci.yml = ..\McArthur\.gitlab-ci.yml
+		CreateUmbracoPackage.ps1 = CreateUmbracoPackage.ps1
 		README.md = README.md
 	EndProjectSection
 EndProject

@@ -261,3 +261,5 @@ __pycache__/
 *.pyc
 /Koben.Kompair.Example2/Web.config
 /Koben.Kompair.Example1/Web.config
+/*.zip
+/*.dll
