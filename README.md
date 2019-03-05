@@ -34,7 +34,8 @@ Please ensure that any Kompair configurations that are not used are commented ou
 
 In order to protect the internals of your Umbraco instances, Koben.Kompair uses configuration values to determine what authentication method to use and perform the authentication operations. 
 
-Out of the box, Koben.Kompair will default to the highest Authentication mode which is Certificate base authentication.
+Out of the box, Koben.Kompair will default to the Api Key Authentication mode with default ClientId and ClientSecret config values. 
+While the original plan was to default to highest security, this meant that adding Kompair to a project and spinning it up without touching the web config was impossible. In order to make this project easier to explore, we now default to Api Key auth.
 Koben.Kompair also provides 2 AppSettings for users to use when working with custom routes or App_Plugins locations.
 
 - Kompair.ApiKey.ClientsConfigPath
@@ -50,7 +51,9 @@ In order to disable the Kompair API authentication you will need make the follow
   - Update the value to "None" on all Umbraco instances you have installed Kompair on.
 
 #### Api Key Authentication
-Api Key is the 2nd highest level of security. A shared key is used to authenticate an API consumer.
+Api Key is the 2nd highest level of security and is the default configuration. A shared key is used to authenticate an API consumer.
+
+!!! DO NOT DEPLOY TO PRODUCTION WITH THE DEFAULT API KEY VALUES !!!
 
 In order to use Api Key authentication you will need make the following AppSettings modifications:
 - Kompair.AuthenticationMode
