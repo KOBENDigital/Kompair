@@ -38,10 +38,13 @@ publish_job:
   artifacts:
     name: Koben.Kompair
     paths:
-    - 'packages'
-    - 'Koben.Kompair\bin\release'
-    - 'Koben.Kompair.Dashboard\bin\release'
+    - 'Koben.Kompair\bin\Release'
+    - 'Koben.Kompair.Dashboard\bin\Release'
     - 'Koben.Kompair.zip'
+  cache:
+    key: '%CI_COMMIT_REF_SLUG%'
+    paths:
+    - 'packages'
 
 deploy_job:
   stage: deploy
