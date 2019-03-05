@@ -38,8 +38,9 @@ publish_job:
   artifacts:
     name: Koben.Kompair
     paths:
-    - 'Koben.Kompair\bin\Release'
-    - 'Koben.Kompair.Dashboard\bin\Release'
+    - 'packages'
+    - 'Koben.Kompair\bin\release'
+    - 'Koben.Kompair.Dashboard\bin\release'
     - 'Koben.Kompair.zip'
 
 deploy_job:
