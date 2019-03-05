@@ -23,8 +23,8 @@ build_job:
 publish_job:
   stage: publish
   only:
-    - tags
     - master
+    - tags
   script:
     - 'set MSBUILDDISABLENODEREUSE=1'
     - 'echo Restoring NuGet Packages...'
