@@ -18,6 +18,8 @@ You can run the following command from within Visual Studio:
     PM> Install-Package Koben.Kompair
 
 ### Umbraco Package
+[![Our Umbraco project page](https://img.shields.io/badge/our-umbraco-orange.svg)](https://our.umbraco.com/packages/backoffice-extensions/kompair/)
+
 https://our.umbraco.com/packages/backoffice-extensions/kompair/
 
 ### Manually
