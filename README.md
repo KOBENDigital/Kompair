@@ -21,6 +21,7 @@ You can run the following command from within Visual Studio:
 https://our.umbraco.com/packages/backoffice-extensions/kompair/
 
 ### Manually
+[![pipeline status](https://gitlab.com/EwneoN/Koben.Kompair/badges/master/pipeline.svg)](https://gitlab.com/EwneoN/Koben.Kompair/commits/master)
 Download the code, compile it and copy the Kompair binary and the App_Plugins folder into your Umbraco website App_Plugin folder.
 
 ## Configuration
