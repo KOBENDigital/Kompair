@@ -16,14 +16,14 @@
                 </a>
             </li>
             
-            <li class="expand" ng-show="needTray">
+            <li class="expand" ng-class="{ 'open': showTray === true }" ng-show="needTray">
                 <a href ng-click="trayClick()">
                     <i class="icon icon-arrow-right"></i>
                 </a>
             </li>
 
             <li class="help">
-                <a class="help" hotkey="ctrl+shift+h" ng-click="helpClick()" prevent-default>
+                <a href class="help" hotkey="ctrl+shift+h" ng-click="helpClick()" prevent-default>
                     <i class="icon-help-alt"></i>
                     <span><localize key="sections_help">Help</localize></span>
                 </a>

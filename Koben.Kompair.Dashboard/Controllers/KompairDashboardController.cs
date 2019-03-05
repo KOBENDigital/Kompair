@@ -69,8 +69,9 @@ namespace Koben.Kompair.Dashboard.Controllers
 				return BadRequest("targetUrl must be provided");
 			}
 
-			string comparePath = ConfigurationManager.AppSettings[KompairDefaults.GetDocumentTypesForComparisonPathAppSetting] ??
-			                     KompairDefaults.GetDocumentTypesForComparisonPath;
+			string comparePath = !string.IsNullOrWhiteSpace(ConfigurationManager.AppSettings[KompairDefaults.GetDocumentTypesForComparisonPathAppSetting])
+				? ConfigurationManager.AppSettings[KompairDefaults.GetDocumentTypesForComparisonPathAppSetting]
+				: KompairDefaults.GetDocumentTypesForComparisonPath;
 			var source = _KompairDataService.GetDocumentTypesForComparison();
 			var target = await _KompairHttpService.GetTargetDocumentTypes(new Uri(new Uri(request.TargetUrl), comparePath));
 

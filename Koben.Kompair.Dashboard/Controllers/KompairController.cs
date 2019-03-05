@@ -121,8 +121,9 @@ namespace Koben.Kompair.Dashboard.Controllers
 				return false;
 			}
 
-			string clientConfigPath = ConfigurationManager.AppSettings[KompairDefaults.ApiKeyClientsConfigPathAppSetting] 
-			                          ?? KompairDefaults.ApiKeyClientsConfigPath;
+			string clientConfigPath = !string.IsNullOrWhiteSpace(ConfigurationManager.AppSettings[KompairDefaults.ApiKeyClientsConfigPathAppSetting])
+				? ConfigurationManager.AppSettings[KompairDefaults.ApiKeyClientsConfigPathAppSetting]
+				: KompairDefaults.ApiKeyClientsConfigPath;
 			string clientConfigAbsolutePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, clientConfigPath);
 
 			if (!File.Exists(clientConfigAbsolutePath))

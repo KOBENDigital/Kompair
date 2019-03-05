@@ -12,11 +12,11 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		README.md = README.md
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Koben.Kompair.Example1", "Koben.Kompair.Example1\Koben.Kompair.Example1.csproj", "{4325677B-EFD7-4A79-8E65-E497A151439A}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Koben.Kompair.Example2", "Koben.Kompair.Example2\Koben.Kompair.Example2.csproj", "{D819C61F-1F7A-472A-9DF0-C240E96364D6}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Koben.Kompair.Dashboard", "Koben.Kompair.Dashboard\Koben.Kompair.Dashboard.csproj", "{5F8BE031-BA8E-4318-A248-FC569CE97991}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Koben.Kompair.Example1", "Koben.Kompair.Example1\Koben.Kompair.Example1.csproj", "{8398E250-EFD5-43DF-9587-BB847E8CF1DC}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Koben.Kompair.Example2", "Koben.Kompair.Example2\Koben.Kompair.Example2.csproj", "{701AD18E-D16E-4563-B7AC-301ECDD03EB1}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -28,18 +28,18 @@ Global
 		{72F9126F-816B-4FB4-AF65-13510630B3EB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{72F9126F-816B-4FB4-AF65-13510630B3EB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{72F9126F-816B-4FB4-AF65-13510630B3EB}.Release|Any CPU.Build.0 = Release|Any CPU
-		{4325677B-EFD7-4A79-8E65-E497A151439A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{4325677B-EFD7-4A79-8E65-E497A151439A}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{4325677B-EFD7-4A79-8E65-E497A151439A}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{4325677B-EFD7-4A79-8E65-E497A151439A}.Release|Any CPU.Build.0 = Release|Any CPU
-		{D819C61F-1F7A-472A-9DF0-C240E96364D6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{D819C61F-1F7A-472A-9DF0-C240E96364D6}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{D819C61F-1F7A-472A-9DF0-C240E96364D6}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{D819C61F-1F7A-472A-9DF0-C240E96364D6}.Release|Any CPU.Build.0 = Release|Any CPU
 		{5F8BE031-BA8E-4318-A248-FC569CE97991}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{5F8BE031-BA8E-4318-A248-FC569CE97991}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5F8BE031-BA8E-4318-A248-FC569CE97991}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5F8BE031-BA8E-4318-A248-FC569CE97991}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8398E250-EFD5-43DF-9587-BB847E8CF1DC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8398E250-EFD5-43DF-9587-BB847E8CF1DC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8398E250-EFD5-43DF-9587-BB847E8CF1DC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8398E250-EFD5-43DF-9587-BB847E8CF1DC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{701AD18E-D16E-4563-B7AC-301ECDD03EB1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{701AD18E-D16E-4563-B7AC-301ECDD03EB1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{701AD18E-D16E-4563-B7AC-301ECDD03EB1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{701AD18E-D16E-4563-B7AC-301ECDD03EB1}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

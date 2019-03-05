@@ -96,6 +96,7 @@ In order to use Certificate authentication you will need make the following AppS
   - We might need to group items into a table per Match Status to acheive this.
   - Will create a basic mock up for input.
 - DI friendly controllers.
+- More example sites
 
 ## Umbraco Versions
 Kompair has been tested with Umbraco versions:
@@ -103,11 +104,18 @@ Kompair has been tested with Umbraco versions:
 - 7.13.1
 - 7.10.0
 - 7.4.0
+- 7.3.0
 
 More testing on earlier versions is planned and contributers are more than welcome here :)
 Testing on new releases will be performed as they come out.
 
 ## Changelog
+### 0.1.19
+- Added Umbraco 7.3.0 example sites for testing.
+- Dropped .NET framework version down to 4.5.2 to support older runtimes.
+- Fixed bug with custom route and path being empty values.
+- README work.
+- Upped assembly version to 0.1.19.
 ### 0.1.18
 - Added gitlab ci config so my gitlab mirror can handle deployments for me.
 - Added packaging script so CI can create umbraco packages for me.

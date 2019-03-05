@@ -133,7 +133,7 @@
                     //get the thumb of the image
                     var src = document.forms[0].src.value;
                     var ext = src.split('.').pop();
-                    var thumb = src.replace("." + ext, "_thumb." + ext);
+                    var thumb = src.replace("." + ext, "_thumb.jpg");
                     if (src != "") jQuery("#<%=ImageViewer.ClientID%>").UmbracoImageViewerAPI().showImage(thumb);
                 }
             }, 500);
