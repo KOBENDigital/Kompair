@@ -1,7 +1,6 @@
 stages:
 - build
 - publish
-- deploy
 
 build_job:
   stage: build
@@ -46,8 +45,8 @@ publish_job:
     paths:
     - 'packages'
 
-deploy_job:
-  stage: deploy
+deploy_to_nuget_job:
+  stage: publish
   only:
     - tags
   script:  
