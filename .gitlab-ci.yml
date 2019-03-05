@@ -1,6 +1,7 @@
 stages:
 - build
 - publish
+- deploy
 
 build_job:
   stage: build
@@ -40,16 +41,19 @@ publish_job:
     - 'Koben.Kompair\bin\Release'
     - 'Koben.Kompair.Dashboard\bin\Release'
     - 'Koben.Kompair.zip'
-  cache:
-    key: '%CI_COMMIT_REF_SLUG%'
-    paths:
-    - 'packages'
 
-deploy_to_nuget_job:
-  stage: publish
+deploy_job:
+  stage: deploy
   only:
     - tags
   script:  
+    - 'set MSBUILDDISABLENODEREUSE=1'
+    - 'echo Restoring NuGet Packages...'
+    - '"c:\nuget\nuget.exe" restore "Koben.Kompair.sln"'
+    - 'echo NuGet Packages restored'
+    - 'echo Release build...'
+    - '"C:\Program Files (x86)\Microsoft Visual Studio\2017\BuildTools\MSBuild\15.0\Bin\msbuild.exe" /consoleloggerparameters:ErrorsOnly /maxcpucount /nologo /property:Configuration=Release /verbosity:quiet /m:4 /nr:false "Koben.Kompair.sln"'
+    - 'echo Build completed'
     - 'echo Deploying NuGet Package...'
     - 'cd Koben.Kompair\'
     - '"c:\nuget\nuget.exe" pack Koben.Kompair.csproj -Prop Configuration=Release'
