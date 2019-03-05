@@ -51,7 +51,7 @@
       <url>https://github.com/KOBENDigital/Kompair</url>
       <requirements type="strict">
         <major>7</major>
-        <minor>4</minor>
+        <minor>3</minor>
         <patch>0</patch>
       </requirements>
     </package>
