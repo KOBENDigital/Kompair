@@ -34,7 +34,8 @@ foreach ($fileNode in $fileNodes)
 		$fileStream.Close()
 
 		$assemblyLoaded = [System.Reflection.Assembly]::Load($assemblyBytes)
-		$version = $assemblyLoaded.GetName().Version.ToString()
+		$assemblyVersion = $assemblyLoaded.GetName().Version;
+		$version = -Join ($version.Major, ".", $version.Minor, ".", $version.Build)
 		$versionNode.InnerText = $version
 	}
 
